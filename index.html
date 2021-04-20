@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Tehtävämuistio</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/index.js"></script>
 </head>
 <body class="front">
 
@@ -21,12 +23,15 @@
 
 <div id="flex-container">
     <div id="first">
+        <label id="kentat">
+            <input id="otsikkokentta" type="text" placeholder="Kirjoita otsikko...">
+            <input id="tekstikentta" type="text" placeholder="Kirjoita muistiinpano...">
+        </label>
+        <button class="new-note" id="new1" >Uusi muistiinpano</button>
 
-        <div class="new-note">Uusi muistiinpano</div>
-
-        <div class="notehead"> <h2>Otsikko</h2> </div>
-        <div class="note-text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, beatae commodi deserunt dolorem ducimus ea hic id in laborum minima neque officiis omnis possimus quae tenetur velit voluptatem. Blanditiis, quae. </div>
-
+       <!-- <div class="notehead"> <h2 id="otsikko1"></h2> </div>
+        <div class="note-text" id="teksti1"></div>
+        -->
 
     </div>
 
