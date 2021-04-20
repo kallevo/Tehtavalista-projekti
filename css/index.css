@@ -67,13 +67,14 @@ body {
 }
 
 h1 {
-    font-size: 2.5em;
+    font-size: 2.3em;
     color: floralwhite;
     padding: 15px;
+    font-family: 'Rubik', sans-serif;
 }
 
 #nav {
-    padding: 23px;
+    padding: 20px;
 }
 
 li {
@@ -84,6 +85,13 @@ li {
     min-width: 130px;
     text-align: center;
     margin-left: 10px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.2em;
+    border: 2px solid floralwhite;
+}
+
+li border {
+    display:none;
 }
 
 #flex-container {
@@ -92,27 +100,35 @@ li {
 }
 
 #first {
-    background-color: #f6f6f6;
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(252,252,252,1) 0%, rgba(207,225,255,1) 90%, rgba(191,214,250,1) 100%);
     flex-grow: 2;
     align-items: stretch;
+    width: 25%;
 }
 
 #second {
-    background-color: #c3c3c3;
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(232,232,232,1) 0%, rgba(209,226,255,1) 90%, rgba(255,255,255,1) 100%);
     flex-grow: 2;
     align-items: stretch;
+    width: 25%;
 }
 
 #third {
-    background-color: #f6f6f6;
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(252,252,252,1) 0%, rgba(207,225,255,1) 90%, rgba(191,214,250,1) 100%);
     flex-grow: 2;
     align-items: stretch;
+    width: 25%;
 }
 
 #fourth {
-    background-color: #c3c3c3;
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(232,232,232,1) 0%, rgba(209,226,255,1) 90%, rgba(255,255,255,1) 100%);
     flex-grow: 2;
     align-items: stretch;
+    width: 25%;
 }
 
 body.front li#frontpg {
@@ -129,10 +145,63 @@ a {
     text-decoration: none;
 }
 
+a:visited { border-color: #2faffa;
+            color: #0f7ab0;
+}
+
 a:active {
     color: #2faffa;
 }
 
-a:hover {
-    font-weight: bold;
+li:hover {
+    border: 2px solid #6fd2ff;
+    color: #6fd2ff;
+}
+
+/* Muistiinpanolaatikoiden muotoilu */
+
+.notehead {
+    width: 65%;
+    background: rgb(2,0,36);
+    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(125,151,255,1) 0%, rgba(41,119,252,1) 99%, rgba(255,255,255,1) 100%);
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 20px;
+    padding: 8px;
+    border-radius: 15px 15px 0 0;
+    color: floralwhite;
+    box-shadow: 4px 8px 15px #888888;
+}
+
+.notehead h2 {
+    font-size: 1.6em;
+}
+
+.note-text {
+    width: 65%;
+    background-color: floralwhite;
+    margin-left: 15%;
+    margin-right: 15%;
+    font-size: 1.1em;
+    padding: 8px;
+    border-radius: 0 0 15px 15px;
+    color: #4353b1;
+    box-shadow: 4px 8px 15px #888888;
+}
+
+.new-note {
+    background-color: #2faffa;
+    color: floralwhite;
+    padding: 6px;
+    border-radius: 30px;
+    min-width: 130px;
+    text-align: center;
+    margin-left: 10px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.2em;
+    border: 2px solid floralwhite;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 20px;
+    box-shadow: 2px 4px 10px #444444;
 }
