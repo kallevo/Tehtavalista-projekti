@@ -1,9 +1,6 @@
 window.onload = function () {
     let otsikkokentta = document.getElementById('otsikkokentta');
     let tekstikentta = document.getElementById('tekstikentta');
-   /* let otsikko1 = document.getElementById('otsikko1');
-    let teksti1 = document.getElementById('teksti1');
-    */
     let nappi = document.getElementById('new1');
 
     nappi.addEventListener('click', function () {
@@ -18,7 +15,6 @@ window.onload = function () {
         divi.appendChild(h2);
         h2.innerHTML = otsikkokentta.value;
         divi2.innerHTML = tekstikentta.value;
-        //teksti1.innerHTML = tekstikentta.value;
         otsikkokentta.value = "";
         tekstikentta.value = "";
     })
