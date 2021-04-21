@@ -35,7 +35,6 @@ window.onload = function () {
             divi.appendChild(h2);
             h2.innerHTML = otsikkokentta.value;
 
-
             //Muistiinpanon poisto ja muokkaus.
             let poista = document.createElement('div');
             poista.setAttribute('class', 'mdivb');
