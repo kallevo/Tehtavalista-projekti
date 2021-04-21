@@ -206,9 +206,13 @@ li:hover {
     box-shadow: 2px 4px 10px #444444;
 }
 
-#kentat {
+#fields {
     padding: 6px;
     margin-top: 500px;
     margin-left: 10%;
     margin-right: 10%;
+}
+
+.deletebutton {
+    float: right;
 }
