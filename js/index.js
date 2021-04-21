@@ -3,9 +3,16 @@ window.onload = function () {
     let tekstikentta = document.getElementById('tekstikentta');
     let nappi = document.getElementById('new1');
 
-    nappi.addEventListener('click', function () {
+    tekstikentta.addEventListener('keyup', function (event) {
+        if (event.keyCode === 13) {
+            add();
+        }
+    })
+    nappi.addEventListener('click', add);
+
+    function add() {
         //Katsotaan onko joku kenttä tyhjä.
-        if (otsikkokentta.value === ""|| tekstikentta.value === "") {
+        if (otsikkokentta.value === "" || tekstikentta.value === "") {
             return false;
         } else {
             //Elementtien lisäys dom-puuhun.
@@ -33,9 +40,8 @@ window.onload = function () {
             otsikkokentta.value = "";
             tekstikentta.value = "";
         }
-    })
+    }
 }
-
 
     function hideForm() {
     var x = document.getElementById("form-box");
