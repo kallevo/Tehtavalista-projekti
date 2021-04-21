@@ -21,10 +21,10 @@ window.onload = function () {
             h2.innerHTML = otsikkokentta.value;
             divi2.innerHTML = tekstikentta.value;
             //Muistiinpanon poisto.
-            let poista = document.createElement('button');
-            poista.setAttribute('class', 'deletebutton');
-            poista.innerText += 'Poista';
-            divi2.appendChild(poista);
+            let poista = document.createElement('div');
+            poista.setAttribute('class', 'mdivb');
+            poista.innerHTML = '<div id="mdiv"> <div class="mdiv"> <div class="md"></div></div></div>';
+            divi.appendChild(poista);
             poista.addEventListener('click', function () {
                 divi.remove();
                 divi2.remove();
@@ -35,5 +35,16 @@ window.onload = function () {
         }
     })
 }
+
+
+    function hideForm() {
+    var x = document.getElementById("form-box");
+    if (x.style.display === "block") {
+    x.style.display = "none";
+} else {
+    x.style.display = "block";
+}
+}
+
 
 

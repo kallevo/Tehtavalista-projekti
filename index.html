@@ -23,11 +23,16 @@
 
 <div id="flex-container">
     <div id="first">
-        <label id="fields">
-            <input id="otsikkokentta" type="text" placeholder="Kirjoita otsikko...">
-            <input id="tekstikentta" type="text" placeholder="Kirjoita muistiinpano...">
-        </label>
-        <button class="new-note" id="new1" >Uusi muistiinpano</button>
+
+        <button class="new-note" onclick="hideForm()">Uusi muistiinpano</button>
+
+        <div id="form-box">
+            <div id="fields">
+                <input id="otsikkokentta" type="text" placeholder="Kirjoita otsikko..."> <br>
+                <input id="tekstikentta" type="text" placeholder="Kirjoita muistiinpano...">
+            </div>
+            <button class="new-note" id="new1" >Lisää</button>
+        </div>
 
     </div>
 
