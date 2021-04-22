@@ -1,42 +1,102 @@
 let idlaskuri = 1;
+let idlaskuri2 = 1;
+let idlaskuri3 = 1;
+let idlaskuri4 = 1;
 
 window.onload = function () {
-    let otsikkokentta = document.getElementById('otsikkokentta');
-    let tekstikentta = document.getElementById('tekstikentta');
-    let nappi = document.getElementById('new1');
+    //Laitetaan kuuntelijat kaikille riveille.
+    for (let i = 1; i <= 4; i++) {
+        let nappi = document.getElementById('new' + i);
+        let otsikkokentta = document.getElementById('otsikkokentta' + i);
+        let tekstikentta = document.getElementById('tekstikentta' + i);
+        if (i === 1) {
+            otsikkokentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                 add(i, idlaskuri, 'first');
+                }
+            })
 
-    otsikkokentta.addEventListener('keyup', function (event) {
-        if (event.keyCode === 13) {
-            add();
+            tekstikentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                add(i, idlaskuri, 'first');
+            }
+            })
+
+            nappi.addEventListener('click', function () {
+                add(i, idlaskuri, 'first');
+            });
+        } else if (i === 2) {
+            otsikkokentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    add(i, idlaskuri2, 'second');
+                }
+            })
+
+            tekstikentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    add(i, idlaskuri2, 'second');
+                }
+            })
+
+            nappi.addEventListener('click', function () {
+                add(i, idlaskuri2, 'second');
+            });
+        } else if (i === 3) {
+            otsikkokentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    add(i, idlaskuri3, 'third');
+                }
+            })
+
+            tekstikentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    add(i, idlaskuri3, 'third');
+                }
+            })
+
+            nappi.addEventListener('click', function () {
+                add(i, idlaskuri3, 'third');
+            });
+        } else if (i === 4) {
+            otsikkokentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    add(i, idlaskuri4, 'fourth');
+                }
+            })
+
+            tekstikentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    add(i, idlaskuri4, 'fourth');
+                }
+            })
+
+            nappi.addEventListener('click', function () {
+                add(i, idlaskuri4, 'fourth');
+            });
         }
-    })
+    }
 
-    tekstikentta.addEventListener('keyup', function (event) {
-        if (event.keyCode === 13) {
-            add();
-        }
-    })
-    nappi.addEventListener('click', add);
-
-    function add() {
+    function add(row, idlaskuri, divid) {
+        let otsikkokentta = document.getElementById('otsikkokentta' + row);
+        let tekstikentta = document.getElementById('tekstikentta' + row);
         //Katsotaan onko joku kenttä tyhjä.
         if (otsikkokentta.value === "" || tekstikentta.value === "") {
             return false;
         } else {
             //Elementtien lisäys dom-puuhun.
             let divi = document.createElement('div');
-            divi.setAttribute('id', 'diviotsikko1' + idlaskuri)
+            divi.setAttribute('id', 'diviotsikko' + row + idlaskuri)
             let divi2 = document.createElement('div');
-            divi2.setAttribute('id', 'diviteksti1' + idlaskuri)
-            document.getElementById('first').append(divi, divi2);
+            divi2.setAttribute('id', 'diviteksti' + row + idlaskuri)
+            document.getElementById(divid).append(divi, divi2);
             divi.setAttribute('class', 'notehead');
             divi2.setAttribute('class', 'note-text');
             let p = document.createElement('p');
-            p.setAttribute('id', 'teksti1' + idlaskuri)
+            p.setAttribute('id', 'teksti' + row + idlaskuri)
             p.innerHTML = tekstikentta.value;
             divi2.appendChild(p);
             let h2 = document.createElement('h2');
-            h2.setAttribute('id', 'otsikko1' + idlaskuri);
+            h2.setAttribute('id', 'otsikko' + row + idlaskuri);
             divi.appendChild(h2);
             h2.innerHTML = otsikkokentta.value;
 
@@ -117,8 +177,8 @@ window.onload = function () {
     }
 }
 
-    function hideForm() {
-    var x = document.getElementById("form-box");
+    function hideForm(row) {
+    let x = document.getElementById("form-box" + row);
     if (x.style.display === "block") {
     x.style.display = "none";
 } else {
