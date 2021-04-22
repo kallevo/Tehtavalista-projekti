@@ -212,24 +212,53 @@ li:hover {
     margin-left: 70%;
 }
 
-#fields {
+.fields {
     padding: 6px;
     margin-left: 10%;
     margin-right: 10%;
 }
 
-#otsikkokentta {
+.otsikkokentta {
     width: 100%;
 }
 
-#tekstikentta {
+.tekstikentta {
     width: 100%;
     min-height: 100px;
     margin-top: 10px;
 }
 
+#form-box1 {
+    background-color: #2faffa;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: none;
+}
 
-#form-box {
+#form-box2 {
+    background-color: #2faffa;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: none;
+}
+
+#form-box3 {
+    background-color: #2faffa;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: none;
+}
+
+#form-box4 {
     background-color: #2faffa;
     margin-top: 15px;
     margin-left: 20px;
