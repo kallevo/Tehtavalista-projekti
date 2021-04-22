@@ -5,6 +5,11 @@ window.onload = function () {
     let tekstikentta = document.getElementById('tekstikentta');
     let nappi = document.getElementById('new1');
 
+    otsikkokentta.addEventListener('keyup', function (event) {
+        if (event.keyCode === 13) {
+            add();
+        }
+    })
 
     tekstikentta.addEventListener('keyup', function (event) {
         if (event.keyCode === 13) {
@@ -83,7 +88,21 @@ window.onload = function () {
         uusiotsikko.value += otsikko.innerText;
         uusiteksti.value += teksti.innerText;
 
-        valmis.addEventListener('click', function () {
+        uusiotsikko.addEventListener('keyup', function (event) {
+            if (event.keyCode === 13) {
+                click();
+            }
+        })
+
+        uusiteksti.addEventListener('keyup', function (event) {
+            if (event.keyCode === 13) {
+                click();
+            }
+        })
+
+        valmis.addEventListener('click', click);
+
+        function click() {
             otsikko.innerText = uusiotsikko.value;
             teksti.innerText = uusiteksti.value;
 
@@ -94,8 +113,7 @@ window.onload = function () {
 
             valmis.remove();
             ogmuokkaus.style.display = 'block';
-        })
-
+        }
     }
 }
 
