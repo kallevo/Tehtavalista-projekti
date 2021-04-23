@@ -1,4 +1,4 @@
-let idlaskuri = 1;
+let idlaskuri1 = 1;
 let idlaskuri2 = 1;
 let idlaskuri3 = 1;
 let idlaskuri4 = 1;
@@ -12,71 +12,83 @@ window.onload = function () {
         if (i === 1) {
             otsikkokentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                 add(i, idlaskuri, 'first');
+                    add(i, '1', 'first');
                 }
             })
 
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                add(i, idlaskuri, 'first');
-            }
+                    add(i, '1', 'first');
+                }
             })
 
             nappi.addEventListener('click', function () {
-                add(i, idlaskuri, 'first');
+                add(i, '1', 'first');
             });
         } else if (i === 2) {
             otsikkokentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, idlaskuri2, 'second');
+                    add(i, '2', 'second');
                 }
             })
 
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, idlaskuri2, 'second');
+                    add(i, '2', 'second');
                 }
             })
 
             nappi.addEventListener('click', function () {
-                add(i, idlaskuri2, 'second');
+                add(i, '2', 'second');
             });
         } else if (i === 3) {
             otsikkokentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, idlaskuri3, 'third');
+                    add(i, '3', 'third');
                 }
             })
 
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, idlaskuri3, 'third');
+                    add(i, '3', 'third');
                 }
             })
 
             nappi.addEventListener('click', function () {
-                add(i, idlaskuri3, 'third');
+                add(i, '3', 'third');
             });
         } else if (i === 4) {
             otsikkokentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, idlaskuri4, 'fourth');
+                    add(i, '4', 'fourth');
                 }
             })
 
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, idlaskuri4, 'fourth');
+                    add(i, '4', 'fourth');
                 }
             })
 
             nappi.addEventListener('click', function () {
-                add(i, idlaskuri4, 'fourth');
+                add(i, '4', 'fourth');
             });
         }
     }
 
     function add(row, idlaskuri, divid) {
+        let laskuri;
+
+        if (idlaskuri === '1') {
+            laskuri = idlaskuri1;
+        } else if (idlaskuri === '2') {
+            laskuri = idlaskuri2;
+        } else if (idlaskuri === '3') {
+            laskuri = idlaskuri3;
+        } else if (idlaskuri === '4') {
+            laskuri = idlaskuri4;
+        }
+
         let otsikkokentta = document.getElementById('otsikkokentta' + row);
         let tekstikentta = document.getElementById('tekstikentta' + row);
         //Katsotaan onko joku kenttä tyhjä.
@@ -85,18 +97,18 @@ window.onload = function () {
         } else {
             //Elementtien lisäys dom-puuhun.
             let divi = document.createElement('div');
-            divi.setAttribute('id', 'diviotsikko' + row + idlaskuri)
+            divi.setAttribute('id', 'diviotsikko' + row + laskuri)
             let divi2 = document.createElement('div');
-            divi2.setAttribute('id', 'diviteksti' + row + idlaskuri)
+            divi2.setAttribute('id', 'diviteksti' + row + laskuri)
             document.getElementById(divid).append(divi, divi2);
             divi.setAttribute('class', 'notehead');
             divi2.setAttribute('class', 'note-text');
             let p = document.createElement('p');
-            p.setAttribute('id', 'teksti' + row + idlaskuri)
+            p.setAttribute('id', 'teksti' + row + laskuri)
             p.innerHTML = tekstikentta.value;
             divi2.appendChild(p);
             let h2 = document.createElement('h2');
-            h2.setAttribute('id', 'otsikko' + row + idlaskuri);
+            h2.setAttribute('id', 'otsikko' + row + laskuri);
             divi.appendChild(h2);
             h2.innerHTML = otsikkokentta.value;
 
@@ -106,12 +118,20 @@ window.onload = function () {
             poista.innerHTML = '<div id="mdiv"> <div class="mdiv"> <div class="md"></div></div></div>';
             divi.appendChild(poista);
             poista.addEventListener('click', function () {
-                idlaskuri--;
+                if (idlaskuri === '1') {
+                    idlaskuri1--;
+                } else if (idlaskuri === '2') {
+                    idlaskuri2--;
+                } else if (idlaskuri === '3') {
+                    idlaskuri3--;
+                } else if (idlaskuri === '4') {
+                    idlaskuri4--;
+                }
                 divi.remove();
                 divi2.remove();
             })
             let muokkaus = document.createElement('button');
-            muokkaus.setAttribute('id', 'muokkaa1' + idlaskuri);
+            muokkaus.setAttribute('id', 'muokkaa' + row + laskuri);
             muokkaus.innerText += 'muokkaa';
             divi2.appendChild(muokkaus);
             muokkaus.addEventListener('click', function() {
@@ -120,7 +140,16 @@ window.onload = function () {
             //Laitetaan lopuksi kentät tyhjiksi.
             otsikkokentta.value = "";
             tekstikentta.value = "";
-            idlaskuri++;
+
+            if (idlaskuri === '1') {
+                idlaskuri1++;
+            } else if (idlaskuri === '2') {
+                idlaskuri2++;
+            } else if (idlaskuri === '3') {
+                idlaskuri3++;
+            } else if (idlaskuri === '4') {
+                idlaskuri4++;
+            }
         }
     }
 
@@ -177,13 +206,13 @@ window.onload = function () {
     }
 }
 
-    function hideForm(row) {
+function hideForm(row) {
     let x = document.getElementById("form-box" + row);
     if (x.style.display === "block") {
-    x.style.display = "none";
-} else {
-    x.style.display = "block";
-}
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
 }
 
 
