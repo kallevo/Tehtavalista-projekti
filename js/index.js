@@ -1,7 +1,7 @@
-let idlaskuri1 = 1;
-let idlaskuri2 = 1;
-let idlaskuri3 = 1;
-let idlaskuri4 = 1;
+let idlaskuri1 = 0;
+let idlaskuri2 = 0;
+let idlaskuri3 = 0;
+let idlaskuri4 = 0;
 
 window.onload = function () {
     //Laitetaan kuuntelijat kaikille riveille.
@@ -79,22 +79,26 @@ window.onload = function () {
     function add(row, idlaskuri, divid) {
         let laskuri;
 
-        if (idlaskuri === '1') {
-            laskuri = idlaskuri1;
-        } else if (idlaskuri === '2') {
-            laskuri = idlaskuri2;
-        } else if (idlaskuri === '3') {
-            laskuri = idlaskuri3;
-        } else if (idlaskuri === '4') {
-            laskuri = idlaskuri4;
-        }
-
         let otsikkokentta = document.getElementById('otsikkokentta' + row);
         let tekstikentta = document.getElementById('tekstikentta' + row);
         //Katsotaan onko joku kenttä tyhjä.
         if (otsikkokentta.value === "" || tekstikentta.value === "") {
             return false;
         } else {
+            if (idlaskuri === '1') {
+                idlaskuri1++;
+                laskuri = idlaskuri1;
+                console.log(laskuri);
+            } else if (idlaskuri === '2') {
+                idlaskuri2++;
+                laskuri = idlaskuri2;
+            } else if (idlaskuri === '3') {
+                idlaskuri3++;
+                laskuri = idlaskuri3;
+            } else if (idlaskuri === '4') {
+                idlaskuri4++;
+                laskuri = idlaskuri4;
+            }
             //Elementtien lisäys dom-puuhun.
             let divi = document.createElement('div');
             divi.setAttribute('id', 'diviotsikko' + row + laskuri)
@@ -140,16 +144,6 @@ window.onload = function () {
             //Laitetaan lopuksi kentät tyhjiksi.
             otsikkokentta.value = "";
             tekstikentta.value = "";
-
-            if (idlaskuri === '1') {
-                idlaskuri1++;
-            } else if (idlaskuri === '2') {
-                idlaskuri2++;
-            } else if (idlaskuri === '3') {
-                idlaskuri3++;
-            } else if (idlaskuri === '4') {
-                idlaskuri4++;
-            }
         }
     }
 
@@ -208,12 +202,37 @@ window.onload = function () {
 
 function hideForm(row) {
     let x = document.getElementById("form-box" + row);
-    if (x.style.display === "block") {
-        x.style.display = "none";
-    } else {
-        x.style.display = "block";
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+
+function removeAll(row) {
+    let maara;
+    //Tarkistetaan onko rivillä yhtään muistiinpanoa
+    try {
+        document.getElementById('diviotsikko' + row + 1).value;
+    } catch (e) {
+        alert("Rivillä ei ole yhtään muistiinpanoja!");
+        return false;
+    }
+
+    if (row === 1) {
+        maara = idlaskuri1;
+    } else if (row === 2) {
+        maara = idlaskuri2;
+    } else if (row === 3) {
+        maara = idlaskuri3;
+    } else if (row === 4) {
+        maara = idlaskuri4;
+    }
+
+    for (let i = 1; i <= maara; i++) {
+        console.log(row + "," + i + "," + maara);
+        document.getElementById('diviotsikko' + row + i).remove();
+        document.getElementById('diviteksti' + row + i).remove();
     }
 }
-
-
 
