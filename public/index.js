@@ -123,16 +123,16 @@ window.onload = function () {
             let json;
             httprequest.setRequestHeader("Content-Type", "application/json");
             httprequest.onreadystatechange = function() {
-                if (httprequest.readyState === 4 && httprequest.status === 200) {
-                    json = JSON.stringify({
-                        id: laskuri,
-                        rivi: row,
-                        otsikko: otsikkokentta.value,
-                        teksti: tekstikentta.value,
-                    });
-                    console.log(json);
+                if (httprequest.readyState !== 4 && httprequest.status !== 200) {
+                    alert("Yhteysongelma - tiedot eivät välttämättä välity palvelimelle");
                 }
             }
+
+            json = JSON.stringify({
+                rivi: row,
+                otsikko: otsikkokentta.value,
+                teksti: tekstikentta.value,
+            });
             httprequest.send(json);
 
             //Muistiinpanon poisto ja muokkaus.
