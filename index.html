@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Tehtävämuistio</title>
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="/index.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="js/index.js"></script>
+    <script src="/index.js"></script>
 </head>
 <body class="front">
 
@@ -24,13 +24,13 @@
 <div id="flex-container">
     <div id="first">
 
-        <button class="new-note" onclick="hideForm()">Uusi tehtävä</button>
-
-        <div id="form-box">
-            <div id="fields">
+        <button class="new-note" onclick="hideForm(1)">Uusi muistiinpano</button>
+        <button onclick="removeAll(1)">Poista kaikki</button>
+        <div id="form-box1">
+            <div class="fields">
                 <label>
-                <input id="otsikkokentta" type="text" placeholder="Kirjoita otsikko..."> <br>
-                <input id="tekstikentta" type="text" placeholder="Kirjoita kuvaus...">
+                <input class="otsikkokentta" id="otsikkokentta1" type="text" placeholder="Kirjoita otsikko..."> <br>
+                <input class="tekstikentta" id="tekstikentta1" type="text" placeholder="Kirjoita muistiinpano...">
                 </label>
             </div>
             <button class="new-note" id="new1" >Lisää</button>
@@ -39,18 +39,46 @@
     </div>
 
     <div id="second">
-        <div class="new-note">Uusi tehtävä</div>
+        <button class="new-note" onclick="hideForm(2)">Uusi muistiinpano</button>
+        <button onclick="removeAll(2)">Poista kaikki</button>
+        <div id="form-box2">
+            <div class="fields">
+                <label>
+                    <input class="otsikkokentta" id="otsikkokentta2" type="text" placeholder="Kirjoita otsikko..."> <br>
+                    <input class="tekstikentta" id="tekstikentta2" type="text" placeholder="Kirjoita muistiinpano...">
+                </label>
+            </div>
+        <button class="new-note" id="new2">Lisää</button>
+        </div>
     </div>
 
     <div id="third">
-        <div class="new-note">Uusi tehtävä</div>
+        <button class="new-note" onclick="hideForm(3)">Uusi muistiinpano</button>
+        <button onclick="removeAll(3)">Poista kaikki</button>
+        <div id="form-box3">
+            <div class="fields">
+                <label>
+                    <input class="otsikkokentta" id="otsikkokentta3" type="text" placeholder="Kirjoita otsikko..."> <br>
+                    <input class="tekstikentta" id="tekstikentta3" type="text" placeholder="Kirjoita muistiinpano...">
+                </label>
+            </div>
+        <button class="new-note" id="new3">Lisää</button>
+        </div>
     </div>
 
     <div id="fourth">
-        <div class="new-note">Uusi tehtävä</div>
+        <button class="new-note" onclick="hideForm(4)">Uusi muistiinpano</button>
+        <button onclick="removeAll(4)">Poista kaikki</button>
+        <div id="form-box4">
+            <div class="fields">
+                <label>
+                    <input class="otsikkokentta" id="otsikkokentta4" type="text" placeholder="Kirjoita otsikko..."> <br>
+                    <input class="tekstikentta" id="tekstikentta4" type="text" placeholder="Kirjoita muistiinpano...">
+                </label>
+            </div>
+        <button class="new-note" id="new4">Lisää</button>
+        </div>
     </div>
-
-
 
 </div>
 
