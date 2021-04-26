@@ -99,6 +99,7 @@ window.onload = function () {
                 idlaskuri4++;
                 laskuri = idlaskuri4;
             }
+
             //Elementtien lisäys dom-puuhun.
             let divi = document.createElement('div');
             divi.setAttribute('id', 'diviotsikko' + row + laskuri)
@@ -115,6 +116,24 @@ window.onload = function () {
             h2.setAttribute('id', 'otsikko' + row + laskuri);
             divi.appendChild(h2);
             h2.innerHTML = otsikkokentta.value;
+
+            //Tietokantaan lisääminen XMLHttpRequestin avulla
+            let httprequest = new XMLHttpRequest();
+            httprequest.open("POST", "/post", true);
+            let json;
+            httprequest.setRequestHeader("Content-Type", "application/json");
+            httprequest.onreadystatechange = function() {
+                if (httprequest.readyState !== 4 && httprequest.status !== 200) {
+                    alert("Yhteysongelma - tiedot eivät välttämättä välity palvelimelle");
+                }
+            }
+
+            json = JSON.stringify({
+                rivi: row,
+                otsikko: otsikkokentta.value,
+                teksti: tekstikentta.value,
+            });
+            httprequest.send(json);
 
             //Muistiinpanon poisto ja muokkaus.
             let poista = document.createElement('div');
@@ -235,4 +254,3 @@ function removeAll(row) {
         document.getElementById('diviteksti' + row + i).remove();
     }
 }
-
