@@ -99,7 +99,6 @@ window.onload = function () {
                 console.log(laskuri);
             }
         } else {
-
             if (idlaskuri === '1') {
                 idlaskuri1++;
                 laskuri = idlaskuri1;
@@ -175,6 +174,25 @@ window.onload = function () {
             poista.innerHTML = '<div id="mdiv"> <div class="mdiv"> <div class="md"></div></div></div>';
             divi.appendChild(poista);
             poista.addEventListener('click', function () {
+                //Tehdään muutokset tietokantaan.
+                let postrequest = new XMLHttpRequest();
+                postrequest.open("POST", "/postarkisto", true);
+                let json;
+                postrequest.setRequestHeader("Content-Type", "application/json");
+                postrequest.onreadystatechange = function() {
+                    if (postrequest.readyState !== 4 && postrequest.status !== 200) {
+                        alert("Yhteysongelma - poistaminen tietokannasta ei välttämättä onnistunut.");
+                    }
+                }
+
+                json = JSON.stringify({
+                    id: laskuri,
+                    rivi: row,
+                    otsikko: h2.innerText,
+                    teksti: p.innerText,
+                });
+                postrequest.send(json);
+
                 if (idlaskuri === '1') {
                     idlaskuri1--;
                 } else if (idlaskuri === '2') {
