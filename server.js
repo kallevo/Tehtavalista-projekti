@@ -28,7 +28,7 @@ app.get("/index", function (req, res) {
 })
 
 //Tietokantaan lisääminen
-app.post("/post", urlencodedParser, function (req, res) {
+app.post("/posttaulukko1", urlencodedParser, function (req, res) {
     let sql1, sql2, sql3, sql4;
     console.log("body: %j", req.body);
     let jsonObj = req.body;
@@ -51,7 +51,7 @@ app.post("/post", urlencodedParser, function (req, res) {
 });
 
 //Tietokannasta hakeminen
-app.get("/get", function (req, res) {
+app.get("/gettaulukko1", function (req, res) {
     let string;
 
     let sql = "SELECT *"

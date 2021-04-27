@@ -84,22 +84,39 @@ window.onload = function () {
         let otsikkokentta = document.getElementById('otsikkokentta' + row);
         let tekstikentta = document.getElementById('tekstikentta' + row);
 
-        if (idlaskuri === '1') {
-            idlaskuri1++;
-            laskuri = idlaskuri1;
-            console.log(laskuri);
-        } else if (idlaskuri === '2') {
-            idlaskuri2++;
-            laskuri = idlaskuri2;
-            console.log(laskuri);
-        } else if (idlaskuri === '3') {
-            idlaskuri3++;
-            laskuri = idlaskuri3;
-            console.log(laskuri);
-        } else if (idlaskuri === '4') {
-            idlaskuri4++;
-            laskuri = idlaskuri4;
-            console.log(laskuri);
+        if (tietokannasta) {
+            if (idlaskuri === '1') {
+                laskuri = idlaskuri1;
+                console.log(laskuri);
+            } else if (idlaskuri === '2') {
+                laskuri = idlaskuri2;
+                console.log(laskuri);
+            } else if (idlaskuri === '3') {
+                laskuri = idlaskuri3;
+                console.log(laskuri);
+            } else if (idlaskuri === '4') {
+                laskuri = idlaskuri4;
+                console.log(laskuri);
+            }
+        } else {
+
+            if (idlaskuri === '1') {
+                idlaskuri1++;
+                laskuri = idlaskuri1;
+                console.log(laskuri);
+            } else if (idlaskuri === '2') {
+                idlaskuri2++;
+                laskuri = idlaskuri2;
+                console.log(laskuri);
+            } else if (idlaskuri === '3') {
+                idlaskuri3++;
+                laskuri = idlaskuri3;
+                console.log(laskuri);
+            } else if (idlaskuri === '4') {
+                idlaskuri4++;
+                laskuri = idlaskuri4;
+                console.log(laskuri);
+            }
         }
 
         if (!tietokannasta) {
@@ -109,7 +126,7 @@ window.onload = function () {
             }
             //Tietokantaan lisääminen XMLHttpRequestin avulla
             let httprequest = new XMLHttpRequest();
-            httprequest.open("POST", "/post", true);
+            httprequest.open("POST", "/posttaulukko1", true);
             let json;
             httprequest.setRequestHeader("Content-Type", "application/json");
             httprequest.onreadystatechange = function() {
@@ -237,7 +254,7 @@ window.onload = function () {
 
     function loadDb() {
         let gethttprequest = new XMLHttpRequest();
-        gethttprequest.open("GET", "/get", true);
+        gethttprequest.open("GET", "/gettaulukko1", true);
         let json;
         gethttprequest.setRequestHeader("Content-Type", "application/json");
         gethttprequest.onreadystatechange = function() {
