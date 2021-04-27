@@ -132,9 +132,13 @@ window.onload = function () {
             divi.setAttribute('id', 'diviotsikko' + row + laskuri)
             let divi2 = document.createElement('div');
             divi2.setAttribute('id', 'diviteksti' + row + laskuri)
-            document.getElementById(divid).append(divi, divi2);
+            let divi3 = document.createElement('div');
+            divi3.setAttribute('id', 'divimenu' + row + laskuri)
+            document.getElementById(divid).append(divi, divi2, divi3);
             divi.setAttribute('class', 'notehead');
             divi2.setAttribute('class', 'note-text');
+            divi3.setAttribute('class', 'note-menu');
+
             let p = document.createElement('p');
             p.setAttribute('id', 'teksti' + row + laskuri)
             if (tietokannasta) {
@@ -151,11 +155,24 @@ window.onload = function () {
             } else {
                 h2.innerHTML = otsikkokentta.value;
             }
+        let pmenu = document.createElement('p');
+        pmenu.setAttribute('id', 'menu' + row + laskuri);
+        pmenu.setAttribute('class', 'ikonit');
+        divi3.setAttribute('class', 'note-menu');
+        divi3.appendChild(pmenu);
+
+        if (tietokannasta) {
+            pmenu.innerHTML = "<i class=\"fas fa-check-square\">";
+        } else {
+            pmenu.innerHTML = "<i class=\"fas fa-check-square\"></i>";
+        }
+
+
 
             //Muistiinpanon poisto ja muokkaus.
             let poista = document.createElement('div');
             poista.setAttribute('class', 'mdivb');
-            poista.innerHTML = '<div id="mdiv"> <div class="mdiv"> <div class="md"></div></div></div>';
+            poista.innerHTML = '<i class=\"fas fa-window-close\"></i>';
             divi.appendChild(poista);
             poista.addEventListener('click', function () {
                 if (idlaskuri === '1') {
@@ -169,17 +186,24 @@ window.onload = function () {
                 }
                 divi.remove();
                 divi2.remove();
+                divi3.remove();
             })
-            let muokkaus = document.createElement('button');
+            let muokkaus = document.createElement('div');
             muokkaus.setAttribute('id', 'muokkaa' + row + laskuri);
-            muokkaus.innerText += 'muokkaa';
-            divi2.appendChild(muokkaus);
+            muokkaus.setAttribute('class', 'muokkaus');
+            muokkaus.innerHTML += '<i class=\"fas fa-pen-square\"></i>';
             muokkaus.addEventListener('click', function() {
                 edit(h2.id, p.id, divi.id, divi2.id, muokkaus.id);
             });
+
+            divi3.appendChild(muokkaus);
+            divi3.appendChild(poista);
+
             //Laitetaan lopuksi kentät tyhjiksi.
             otsikkokentta.value = "";
             tekstikentta.value = "";
+
+
 
     }
 
