@@ -27,9 +27,9 @@ app.get("/index", function (req, res) {
     res.sendFile(__dirname + "/" + "index.html");
 })
 
-//Tietokantaan lisääminen
+//Tietokannan taulukko1:een lisääminen
 app.post("/posttaulukko1", urlencodedParser, function (req, res) {
-    let sql1, sql2, sql3, sql4;
+    let sql1;
     console.log("body: %j", req.body);
     let jsonObj = req.body;
     console.log("Otsikko: " + jsonObj.otsikko);
@@ -43,6 +43,32 @@ app.post("/posttaulukko1", urlencodedParser, function (req, res) {
     (async () => { // IIFE (Immediately Invoked Function Expression)
         try {
             const result = await query(sql1, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
+        }
+        catch (err) {
+            console.log("Database error!"+ err);
+        }
+    })()
+});
+//Tietokannan arkistoon lisääminen ja taulukko1:stä poistaminen
+app.post("/postarkisto", urlencodedParser, function (req, res) {
+    let sql1, sql2;
+    console.log("body: %j", req.body);
+    let jsonObj = req.body;
+    console.log("Poiston id: " + jsonObj.id);
+
+    sql1 = "DELETE FROM taulukko1"
+        + " WHERE id=? AND rivi=?";
+
+    sql2 = "INSERT INTO Arkisto(id, rivi, otsikko, teksti)"
+        + " VALUES ( ?, ?, ?, ?)"
+
+    let responseString = JSON.stringify(jsonObj)
+    res.send("POST succesful: "+ responseString);
+
+    (async () => { // IIFE (Immediately Invoked Function Expression)
+        try {
+            const result1 = await query(sql1, [jsonObj.id, jsonObj.rivi]);
+            const result2 = await query(sql2, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
         }
         catch (err) {
             console.log("Database error!"+ err);
