@@ -27,13 +27,23 @@ app.get("/index", function (req, res) {
     res.sendFile(__dirname + "/" + "index.html");
 })
 
+//Tietokantaan lisääminen
 app.post("/post", urlencodedParser, function (req, res) {
-    let sql;
+    let sql1, sql2, sql3, sql4;
     console.log("body: %j", req.body);
     let jsonObj = req.body;
     console.log("Otsikko: " + jsonObj.otsikko);
 
-    sql = "INSERT INTO taulukko1(id, rivi, otsikko, teksti)"
+    sql1 = "INSERT INTO taulukko1(id, rivi, otsikko, teksti)"
+        + " VALUES ( ?, ?, ?, ?)";
+
+    sql2 = "INSERT INTO taulukko2(id, rivi, otsikko, teksti)"
+        + " VALUES ( ?, ?, ?, ?)";
+
+    sql3 = "INSERT INTO taulukko3(id, rivi, otsikko, teksti)"
+        + " VALUES ( ?, ?, ?, ?)";
+
+    sql4 = "INSERT INTO taulukko4(id, rivi, otsikko, teksti)"
         + " VALUES ( ?, ?, ?, ?)";
 
     let responseString = JSON.stringify(jsonObj)
@@ -41,7 +51,15 @@ app.post("/post", urlencodedParser, function (req, res) {
 
     (async () => { // IIFE (Immediately Invoked Function Expression)
         try {
-            const result = await query(sql, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
+            if (jsonObj.rivi === 1) {
+                const result = await query(sql1, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
+            } else if (jsonObj.rivi === 2) {
+                const result2 = await query(sql2, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
+            } else if (jsonObj.rivi === 3) {
+                const result3 = await query(sql3, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
+            } else if (jsonObj.rivi === 4) {
+                const result4 = await query(sql4, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
+            }
         }
         catch (err) {
             console.log("Database error!"+ err);
@@ -49,7 +67,28 @@ app.post("/post", urlencodedParser, function (req, res) {
     })()
 });
 
+//Tietokannasta hakeminen
+app.get("/get", function (req, res) {
+    let string;
 
+    let sql = "SELECT rivi, kategoria, otsikko, teksti"
+        + " FROM taulukko1, taulukko2, taulukko3, taulukko4"
+        + " ORDER BY id";
+
+    (async () => { // IIFE (Immediately Invoked Function Expression)
+        try {
+            const rows = await query(sql);
+            string = JSON.stringify(rows);
+            let result = '{"numOfRows":' + rows.length + ', "rows":' + string + '}';
+            console.log("Rivejä: " + rows.length);
+            console.log(rows);
+            res.send(result);
+        }
+        catch (err) {
+            console.log("Database error!"+ err);
+        }
+    })()
+});
 
 let server = app.listen(8080, function () {
     let host = server.address().address

@@ -4,6 +4,8 @@ let idlaskuri3 = 0;
 let idlaskuri4 = 0;
 
 window.onload = function () {
+    //Ladataan muistiinpanot tietokannasta
+    loadDb();
     //Laitetaan kuuntelijat kaikille riveille.
     for (let i = 1; i <= 4; i++) {
         let nappi = document.getElementById('new' + i);
@@ -12,79 +14,100 @@ window.onload = function () {
         if (i === 1) {
             otsikkokentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '1', 'first');
+                    add(i, '1', 'first', false);
                 }
             })
 
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '1', 'first');
+                    add(i, '1', 'first', false);
                 }
             })
 
             nappi.addEventListener('click', function () {
-                add(i, '1', 'first');
+                add(i, '1', 'first', false);
             });
         } else if (i === 2) {
             otsikkokentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '2', 'second');
+                    add(i, '2', 'second', false);
                 }
             })
 
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '2', 'second');
+                    add(i, '2', 'second', false);
                 }
             })
 
             nappi.addEventListener('click', function () {
-                add(i, '2', 'second');
+                add(i, '2', 'second', false);
             });
         } else if (i === 3) {
             otsikkokentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '3', 'third');
+                    add(i, '3', 'third', false);
                 }
             })
 
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '3', 'third');
+                    add(i, '3', 'third', false);
                 }
             })
 
             nappi.addEventListener('click', function () {
-                add(i, '3', 'third');
+                add(i, '3', 'third', false);
             });
         } else if (i === 4) {
             otsikkokentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '4', 'fourth');
+                    add(i, '4', 'fourth', false);
                 }
             })
 
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '4', 'fourth');
+                    add(i, '4', 'fourth', false);
                 }
             })
 
             nappi.addEventListener('click', function () {
-                add(i, '4', 'fourth');
+                add(i, '4', 'fourth', false);
             });
         }
     }
 
-    function add(row, idlaskuri, divid) {
+    function add(row, idlaskuri, divid, tietokannasta, otsikko, teksti) {
         let laskuri;
 
         let otsikkokentta = document.getElementById('otsikkokentta' + row);
         let tekstikentta = document.getElementById('tekstikentta' + row);
+
+        if (!tietokannasta) {
+            if (otsikkokentta.value === "" || tekstikentta.value === "") {
+                return false;
+            }
+            //Tietokantaan lisääminen XMLHttpRequestin avulla
+            let httprequest = new XMLHttpRequest();
+            httprequest.open("POST", "/post", true);
+            let json;
+            httprequest.setRequestHeader("Content-Type", "application/json");
+            httprequest.onreadystatechange = function() {
+                if (httprequest.readyState !== 4 && httprequest.status !== 200) {
+                    alert("Yhteysongelma - tiedot eivät välttämättä välity palvelimelle.");
+                }
+            }
+
+            json = JSON.stringify({
+                rivi: row,
+                otsikko: otsikkokentta.value,
+                teksti: tekstikentta.value,
+            });
+            httprequest.send(json);
+        }
         //Katsotaan onko joku kenttä tyhjä.
-        if (otsikkokentta.value === "" || tekstikentta.value === "") {
-            return false;
-        } else {
+
             if (idlaskuri === '1') {
                 idlaskuri1++;
                 laskuri = idlaskuri1;
@@ -92,12 +115,15 @@ window.onload = function () {
             } else if (idlaskuri === '2') {
                 idlaskuri2++;
                 laskuri = idlaskuri2;
+                console.log(laskuri);
             } else if (idlaskuri === '3') {
                 idlaskuri3++;
                 laskuri = idlaskuri3;
+                console.log(laskuri);
             } else if (idlaskuri === '4') {
                 idlaskuri4++;
                 laskuri = idlaskuri4;
+                console.log(laskuri);
             }
 
             //Elementtien lisäys dom-puuhun.
@@ -110,30 +136,20 @@ window.onload = function () {
             divi2.setAttribute('class', 'note-text');
             let p = document.createElement('p');
             p.setAttribute('id', 'teksti' + row + laskuri)
-            p.innerHTML = tekstikentta.value;
+            if (tietokannasta) {
+                p.innerHTML = teksti;
+            } else {
+                p.innerHTML = tekstikentta.value;
+            }
             divi2.appendChild(p);
             let h2 = document.createElement('h2');
             h2.setAttribute('id', 'otsikko' + row + laskuri);
             divi.appendChild(h2);
-            h2.innerHTML = otsikkokentta.value;
-
-            //Tietokantaan lisääminen XMLHttpRequestin avulla
-            let httprequest = new XMLHttpRequest();
-            httprequest.open("POST", "/post", true);
-            let json;
-            httprequest.setRequestHeader("Content-Type", "application/json");
-            httprequest.onreadystatechange = function() {
-                if (httprequest.readyState !== 4 && httprequest.status !== 200) {
-                    alert("Yhteysongelma - tiedot eivät välttämättä välity palvelimelle");
-                }
+            if (tietokannasta) {
+                h2.innerHTML = otsikko;
+            } else {
+                h2.innerHTML = otsikkokentta.value;
             }
-
-            json = JSON.stringify({
-                rivi: row,
-                otsikko: otsikkokentta.value,
-                teksti: tekstikentta.value,
-            });
-            httprequest.send(json);
 
             //Muistiinpanon poisto ja muokkaus.
             let poista = document.createElement('div');
@@ -163,7 +179,7 @@ window.onload = function () {
             //Laitetaan lopuksi kentät tyhjiksi.
             otsikkokentta.value = "";
             tekstikentta.value = "";
-        }
+
     }
 
     function edit(otsikkoid, tekstiid, otsikondiviid, tekstindiviid, muokkausnappiid) {
@@ -216,6 +232,44 @@ window.onload = function () {
             valmis.remove();
             ogmuokkaus.style.display = 'block';
         }
+    }
+
+    function loadDb() {
+        let gethttprequest = new XMLHttpRequest();
+        gethttprequest.open("GET", "/get", true);
+        let json;
+        gethttprequest.setRequestHeader("Content-Type", "application/json");
+        gethttprequest.onreadystatechange = function() {
+            if (gethttprequest.readyState === 4 && gethttprequest.status === 200) {
+                json = JSON.parse(gethttprequest.responseText);
+
+                if (json.numOfRows > 0) {
+                    for (let i in json.rows) {
+                        let idlaskuri;
+                        let divid;
+
+                        if (json.rows[i].rivi === 1) {
+                            idlaskuri = '1';
+                            divid = 'first'
+                        } else if (json.rows[i].rivi === 2) {
+                            idlaskuri = '2';
+                            divid = 'second'
+                        } else if (json.rows[i].rivi === 3) {
+                            idlaskuri = '3';
+                            divid = 'third'
+                        } else if (json.rows[i].rivi === 4) {
+                            idlaskuri = '4';
+                            divid = 'fourth'
+                        }
+                        add(json.rows[i].rivi, idlaskuri, divid, true, json.rows[i].otsikko, json.rows[i].teksti);
+                        console.log("lisätty");
+                    }
+                } else {
+                    alert("Tietoja ei saatu tietokannasta.")
+                }
+            }
+        }
+        gethttprequest.send();
     }
 }
 
