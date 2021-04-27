@@ -84,7 +84,26 @@ window.onload = function () {
         let otsikkokentta = document.getElementById('otsikkokentta' + row);
         let tekstikentta = document.getElementById('tekstikentta' + row);
 
+        if (idlaskuri === '1') {
+            idlaskuri1++;
+            laskuri = idlaskuri1;
+            console.log(laskuri);
+        } else if (idlaskuri === '2') {
+            idlaskuri2++;
+            laskuri = idlaskuri2;
+            console.log(laskuri);
+        } else if (idlaskuri === '3') {
+            idlaskuri3++;
+            laskuri = idlaskuri3;
+            console.log(laskuri);
+        } else if (idlaskuri === '4') {
+            idlaskuri4++;
+            laskuri = idlaskuri4;
+            console.log(laskuri);
+        }
+
         if (!tietokannasta) {
+            //Katsotaan onko joku kenttä tyhjä.
             if (otsikkokentta.value === "" || tekstikentta.value === "") {
                 return false;
             }
@@ -100,31 +119,13 @@ window.onload = function () {
             }
 
             json = JSON.stringify({
+                id: laskuri,
                 rivi: row,
                 otsikko: otsikkokentta.value,
                 teksti: tekstikentta.value,
             });
             httprequest.send(json);
         }
-        //Katsotaan onko joku kenttä tyhjä.
-
-            if (idlaskuri === '1') {
-                idlaskuri1++;
-                laskuri = idlaskuri1;
-                console.log(laskuri);
-            } else if (idlaskuri === '2') {
-                idlaskuri2++;
-                laskuri = idlaskuri2;
-                console.log(laskuri);
-            } else if (idlaskuri === '3') {
-                idlaskuri3++;
-                laskuri = idlaskuri3;
-                console.log(laskuri);
-            } else if (idlaskuri === '4') {
-                idlaskuri4++;
-                laskuri = idlaskuri4;
-                console.log(laskuri);
-            }
 
             //Elementtien lisäys dom-puuhun.
             let divi = document.createElement('div');
@@ -250,22 +251,26 @@ window.onload = function () {
 
                         if (json.rows[i].rivi === 1) {
                             idlaskuri = '1';
+                            idlaskuri1 = json.rows[i].id;
                             divid = 'first'
                         } else if (json.rows[i].rivi === 2) {
                             idlaskuri = '2';
+                            idlaskuri2 = json.rows[i].id;
                             divid = 'second'
                         } else if (json.rows[i].rivi === 3) {
                             idlaskuri = '3';
+                            idlaskuri3 = json.rows[i].id;
                             divid = 'third'
                         } else if (json.rows[i].rivi === 4) {
                             idlaskuri = '4';
+                            idlaskuri4 = json.rows[i].id;
                             divid = 'fourth'
                         }
                         add(json.rows[i].rivi, idlaskuri, divid, true, json.rows[i].otsikko, json.rows[i].teksti);
                         console.log("lisätty");
                     }
                 } else {
-                    alert("Tietoja ei saatu tietokannasta.")
+                    alert("Tietoja ei löytynyt tietokannasta.")
                 }
             }
         }

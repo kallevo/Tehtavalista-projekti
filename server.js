@@ -37,29 +37,12 @@ app.post("/post", urlencodedParser, function (req, res) {
     sql1 = "INSERT INTO taulukko1(id, rivi, otsikko, teksti)"
         + " VALUES ( ?, ?, ?, ?)";
 
-    sql2 = "INSERT INTO taulukko2(id, rivi, otsikko, teksti)"
-        + " VALUES ( ?, ?, ?, ?)";
-
-    sql3 = "INSERT INTO taulukko3(id, rivi, otsikko, teksti)"
-        + " VALUES ( ?, ?, ?, ?)";
-
-    sql4 = "INSERT INTO taulukko4(id, rivi, otsikko, teksti)"
-        + " VALUES ( ?, ?, ?, ?)";
-
     let responseString = JSON.stringify(jsonObj)
     res.send("POST succesful: "+ responseString);
 
     (async () => { // IIFE (Immediately Invoked Function Expression)
         try {
-            if (jsonObj.rivi === 1) {
-                const result = await query(sql1, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
-            } else if (jsonObj.rivi === 2) {
-                const result2 = await query(sql2, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
-            } else if (jsonObj.rivi === 3) {
-                const result3 = await query(sql3, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
-            } else if (jsonObj.rivi === 4) {
-                const result4 = await query(sql4, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
-            }
+            const result = await query(sql1, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
         }
         catch (err) {
             console.log("Database error!"+ err);
@@ -71,8 +54,8 @@ app.post("/post", urlencodedParser, function (req, res) {
 app.get("/get", function (req, res) {
     let string;
 
-    let sql = "SELECT rivi, kategoria, otsikko, teksti"
-        + " FROM taulukko1, taulukko2, taulukko3, taulukko4"
+    let sql = "SELECT *"
+        + " FROM taulukko1"
         + " ORDER BY id";
 
     (async () => { // IIFE (Immediately Invoked Function Expression)
