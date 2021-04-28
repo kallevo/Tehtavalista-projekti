@@ -10,6 +10,7 @@ window.onload = function () {
     for (let i = 1; i <= 4; i++) {
         let nappi = document.getElementById('new' + i);
         let otsikkokentta = document.getElementById('otsikkokentta' + i);
+        let kategoriakentta = document.getElementById('kategoriakentta' + i);
         let tekstikentta = document.getElementById('tekstikentta' + i);
         if (i === 1) {
             otsikkokentta.addEventListener('keyup', function (event) {
