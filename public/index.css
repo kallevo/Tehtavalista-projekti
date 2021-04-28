@@ -326,18 +326,21 @@ li:hover {
     font-size: 26px;
     color: #259d00;
     padding-left: 3px;
+    display: inline-block;
 }
 
 .fa-pen-square {
     font-size: 26px;
     color: #ffa500;
     padding-left: 3px;
+    display: inline-block;
 }
 
 .fa-window-close {
     font-size: 26px;
     color: red;
     padding-left: 3px;
+    display: inline-block;
 }
 
 .fa-check-square:hover {
@@ -359,4 +362,16 @@ li:hover {
     color: #6e0000;
     padding-left: 3px;
     cursor: pointer;
+}
+
+.muokkaus {
+    display: inline-block;
+}
+
+.ikonit {
+    display: inline-block;
+}
+
+.mdivb {
+    display: inline-block;
 }
