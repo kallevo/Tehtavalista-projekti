@@ -105,6 +105,7 @@ li border {
     flex-grow: 2;
     align-items: stretch;
     width: 25%;
+    min-width: 300px;
 }
 
 #second {
@@ -113,6 +114,7 @@ li border {
     flex-grow: 2;
     align-items: stretch;
     width: 25%;
+    min-width: 300px;
 }
 
 #third {
@@ -121,6 +123,7 @@ li border {
     flex-grow: 2;
     align-items: stretch;
     width: 25%;
+    min-width: 300px;
 }
 
 #fourth {
@@ -129,6 +132,7 @@ li border {
     flex-grow: 2;
     align-items: stretch;
     width: 25%;
+    min-width: 300px;
 }
 
 body.front li#frontpg {
@@ -143,6 +147,7 @@ body.archive li#archive {
 
 a {
     text-decoration: none;
+    cursor: pointer;
 }
 
 a:visited { border-color: #2faffa;
@@ -162,6 +167,7 @@ li:hover {
 
 .notehead {
     width: 65%;
+    min-height: 26px;
     background: rgb(2,0,36);
     background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(125,151,255,1) 0%, rgba(41,119,252,1) 99%, rgba(255,255,255,1) 100%);
     margin-left: 15%;
@@ -185,9 +191,22 @@ li:hover {
     margin-right: 15%;
     font-size: 1.1em;
     padding: 8px;
+    color: #4353b1;
+    box-shadow: 4px 8px 15px #888888;
+}
+
+.note-menu {
+    width: 65%;
+    background-color: #e0e0e0;
+    margin-left: 15%;
+    margin-right: 15%;
+    font-size: 0.7em;
+    text-align: center;
+    padding: 8px;
     border-radius: 0 0 15px 15px;
     color: #4353b1;
     box-shadow: 4px 8px 15px #888888;
+    display: inline-block;
 }
 
 .new-note {
@@ -206,6 +225,11 @@ li:hover {
     box-shadow: 2px 4px 10px #444444;
     padding-left: 20px;
     padding-right: 20px;
+}
+
+.new-note:hover {
+    border-color: #6fd2ff;
+    cursor: pointer;
 }
 
 #new1 {
@@ -268,12 +292,15 @@ li:hover {
     display: none;
 }
 
+/* sulkulaatikko */
+
 #mdiv {
     width: 25px;
     height: 25px;
     background-color: #ffffff;
     border: 1px solid black;
-    margin-left: 282px;
+    margin-left: 2px;
+    float: right;
 }
 
 .mdiv {
@@ -291,4 +318,60 @@ li:hover {
     background-color: black;
     transform: rotate(90deg);
     Z-index: 2;
+}
+
+/* Ikonien muotoilut */
+
+.fa-check-square {
+    font-size: 26px;
+    color: #259d00;
+    padding-left: 3px;
+    display: inline-block;
+}
+
+.fa-pen-square {
+    font-size: 26px;
+    color: #ffa500;
+    padding-left: 3px;
+    display: inline-block;
+}
+
+.fa-window-close {
+    font-size: 26px;
+    color: red;
+    padding-left: 3px;
+    display: inline-block;
+}
+
+.fa-check-square:hover {
+    font-size: 26px;
+    color: #154c00;
+    padding-left: 3px;
+    cursor: pointer;
+}
+
+.fa-pen-square:hover {
+    font-size: 26px;
+    color: #996700;
+    padding-left: 3px;
+    cursor: pointer;
+}
+
+.fa-window-close:hover {
+    font-size: 26px;
+    color: #6e0000;
+    padding-left: 3px;
+    cursor: pointer;
+}
+
+.muokkaus {
+    display: inline-block;
+}
+
+.ikonit {
+    display: inline-block;
+}
+
+.mdivb {
+    display: inline-block;
 }
