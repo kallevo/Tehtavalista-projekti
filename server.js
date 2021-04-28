@@ -29,7 +29,7 @@ app.get("/index", function (req, res) {
 
 //Tietokannan taulukko1:een lisääminen
 app.post("/posttaulukko1", urlencodedParser, function (req, res) {
-    let sql1;
+    let sql1, sql2;
     console.log("body: %j", req.body);
     let jsonObj = req.body;
     console.log("Otsikko: " + jsonObj.otsikko);
@@ -37,12 +37,20 @@ app.post("/posttaulukko1", urlencodedParser, function (req, res) {
     sql1 = "INSERT INTO taulukko1(id, rivi, otsikko, teksti)"
         + " VALUES ( ?, ?, ?, ?)";
 
+    sql2 = "UPDATE taulukko1"
+        + " SET otsikko=?, teksti=?"
+        + " WHERE id=? AND rivi=?"
+
     let responseString = JSON.stringify(jsonObj)
     res.send("POST succesful: "+ responseString);
 
     (async () => { // IIFE (Immediately Invoked Function Expression)
         try {
-            const result = await query(sql1, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
+            if (jsonObj.edit === "false") {
+                const result = await query(sql1, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
+            } else if (jsonObj.edit === "true") {
+                const result = await query(sql2, [jsonObj.otsikko, jsonObj.teksti, jsonObj.id , jsonObj.rivi]);
+            }
         }
         catch (err) {
             console.log("Database error!"+ err);
