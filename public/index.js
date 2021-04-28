@@ -209,16 +209,6 @@ window.onload = function () {
                     teksti: p.innerText,
                 });
                 postrequest.send(json);
-
-                if (idlaskuri === '1') {
-                    idlaskuri1--;
-                } else if (idlaskuri === '2') {
-                    idlaskuri2--;
-                } else if (idlaskuri === '3') {
-                    idlaskuri3--;
-                } else if (idlaskuri === '4') {
-                    idlaskuri4--;
-                }
                 divi.remove();
                 divi2.remove();
                 divi3.remove();
