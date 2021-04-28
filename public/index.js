@@ -207,6 +207,7 @@ window.onload = function () {
                     rivi: row,
                     otsikko: h2.innerText,
                     teksti: p.innerText,
+                    montapoistoa: "false",
                 });
                 postrequest.send(json);
                 divi.remove();
@@ -382,31 +383,19 @@ function removeAll(row) {
     }
 
     //Tietokannasta poisto
-    for (let i = maara; i >= 0; i--) {
-        let postrequest2 = new XMLHttpRequest();
-        let json;
-        postrequest2.open("POST", "/postarkisto", true);
-        postrequest2.setRequestHeader("Content-Type", "application/json");
-        postrequest2.onreadystatechange = function() {
-            if (postrequest2.readyState !== 4 && postrequest2.status !== 200) {
-                alert("Yhteysongelma - poistaminen tietokannasta ei välttämättä onnistunut.");
-            }}
-
-            if (document.body.contains(document.getElementById('diviotsikko' + row + i))) {
-                let otsikko = document.getElementById('otsikko' + row + i);
-                let teksti = document.getElementById('teksti' + row + i);
-                json = JSON.stringify({
-                    id: i,
-                    rivi: row,
-                    otsikko: otsikko.innerText,
-                    teksti: teksti.innerText,
-                });
-
-                postrequest2.send(json);
-            } else {
-                break;
-            }
-        }
+    let postrequest2 = new XMLHttpRequest();
+    let json;
+    postrequest2.open("POST", "/postarkisto", true);
+    postrequest2.setRequestHeader("Content-Type", "application/json");
+    postrequest2.onreadystatechange = function() {
+        if (postrequest2.readyState !== 4 && postrequest2.status !== 200) {
+            alert("Yhteysongelma - poistaminen tietokannasta ei välttämättä onnistunut.");
+        }}
+    json = JSON.stringify({
+        rivi: row,
+        montapoistoa: "true",
+    });
+    postrequest2.send(json);
 
     //Elementtien poisto
     for (let i = maara; i >= 0; i--) {
