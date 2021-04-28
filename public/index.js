@@ -191,7 +191,7 @@ window.onload = function () {
             poista.innerHTML = '<i class=\"fas fa-window-close\"></i>';
             divi.appendChild(poista);
             poista.addEventListener('click', function () {
-                //Tehdään muutokset tietokantaan.
+                //Tehdään poisto tietokannassa.
                 let postrequest = new XMLHttpRequest();
                 postrequest.open("POST", "/postarkisto", true);
                 let json;
@@ -338,27 +338,85 @@ function hideForm(row) {
 
 function removeAll(row) {
     let maara;
-    //Tarkistetaan onko rivillä yhtään muistiinpanoa
-    try {
-        document.getElementById('diviotsikko' + row + 1).value;
-    } catch (e) {
-        alert("Rivillä ei ole yhtään muistiinpanoja!");
-        return false;
-    }
 
     if (row === 1) {
         maara = idlaskuri1;
+        //Tarkistetaan onko rivillä yhtään muistiinpanoa
+        try {
+            document.getElementById('diviotsikko' + row + maara).value;
+        } catch (e) {
+            alert("Rivillä ei ole yhtään muistiinpanoja!");
+            idlaskuri1 = 0;
+            return false;
+        }
     } else if (row === 2) {
         maara = idlaskuri2;
+        //Tarkistetaan onko rivillä yhtään muistiinpanoa
+        try {
+            document.getElementById('diviotsikko' + row + maara).value;
+        } catch (e) {
+            alert("Rivillä ei ole yhtään muistiinpanoja!");
+            idlaskuri2 = 0;
+            return false;
+        }
     } else if (row === 3) {
         maara = idlaskuri3;
+        //Tarkistetaan onko rivillä yhtään muistiinpanoa
+        try {
+            document.getElementById('diviotsikko' + row + maara).value;
+        } catch (e) {
+            alert("Rivillä ei ole yhtään muistiinpanoja!");
+            idlaskuri3 = 0;
+            return false;
+        }
     } else if (row === 4) {
         maara = idlaskuri4;
+        //Tarkistetaan onko rivillä yhtään muistiinpanoa
+        try {
+            document.getElementById('diviotsikko' + row + maara).value;
+        } catch (e) {
+            alert("Rivillä ei ole yhtään muistiinpanoja!");
+            idlaskuri4 = 0;
+            return false;
+        }
     }
 
-    for (let i = 1; i <= maara; i++) {
-        console.log(row + "," + i + "," + maara);
-        document.getElementById('diviotsikko' + row + i).remove();
-        document.getElementById('diviteksti' + row + i).remove();
+    //Tietokannasta poisto
+    for (let i = maara; i >= 0; i--) {
+        let postrequest2 = new XMLHttpRequest();
+        let json;
+        postrequest2.open("POST", "/postarkisto", true);
+        postrequest2.setRequestHeader("Content-Type", "application/json");
+        postrequest2.onreadystatechange = function() {
+            if (postrequest2.readyState !== 4 && postrequest2.status !== 200) {
+                alert("Yhteysongelma - poistaminen tietokannasta ei välttämättä onnistunut.");
+            }}
+
+            if (document.body.contains(document.getElementById('diviotsikko' + row + i))) {
+                let otsikko = document.getElementById('otsikko' + row + i);
+                let teksti = document.getElementById('teksti' + row + i);
+                json = JSON.stringify({
+                    id: i,
+                    rivi: row,
+                    otsikko: otsikko.innerText,
+                    teksti: teksti.innerText,
+                });
+
+                postrequest2.send(json);
+            } else {
+                break;
+            }
+        }
+
+    //Elementtien poisto
+    for (let i = maara; i >= 0; i--) {
+        if (document.body.contains(document.getElementById('diviotsikko' + row + i))) {
+            console.log(row + "," + i + "," + maara);
+            document.getElementById('diviotsikko' + row + i).remove();
+            document.getElementById('divimenu' + row + i).remove();
+            document.getElementById('diviteksti' + row + i).remove();
+        } else {
+            break;
+        }
     }
 }

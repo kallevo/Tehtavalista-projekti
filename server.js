@@ -67,8 +67,8 @@ app.post("/postarkisto", urlencodedParser, function (req, res) {
 
     (async () => { // IIFE (Immediately Invoked Function Expression)
         try {
-            const result1 = await query(sql1, [jsonObj.id, jsonObj.rivi]);
-            const result2 = await query(sql2, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
+            const result2 = await query(sql1, [jsonObj.id, jsonObj.rivi]);
+            const result3 = await query(sql2, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
         }
         catch (err) {
             console.log("Database error!"+ err);
