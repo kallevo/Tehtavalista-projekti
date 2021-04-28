@@ -140,6 +140,7 @@ window.onload = function () {
                 rivi: row,
                 otsikko: otsikkokentta.value,
                 teksti: tekstikentta.value,
+                edit: "false",
             });
             httprequest.send(json);
         }
@@ -220,7 +221,7 @@ window.onload = function () {
             muokkaus.setAttribute('class', 'muokkaus');
             muokkaus.innerHTML += '<i class=\"fas fa-pen-square\"></i>';
             muokkaus.addEventListener('click', function() {
-                edit(h2.id, p.id, divi.id, divi2.id, muokkaus.id);
+                edit(h2.id, p.id, divi.id, divi2.id, muokkaus.id, laskuri, row);
             });
 
             divi3.appendChild(muokkaus);
@@ -234,7 +235,7 @@ window.onload = function () {
 
     }
 
-    function edit(otsikkoid, tekstiid, otsikondiviid, tekstindiviid, muokkausnappiid) {
+    function edit(otsikkoid, tekstiid, otsikondiviid, tekstindiviid, muokkausnappiid, idlaskuri, row) {
         let otsikko = document.getElementById(otsikkoid);
         let teksti = document.getElementById(tekstiid);
         let ogmuokkaus = document.getElementById(muokkausnappiid);
@@ -273,6 +274,26 @@ window.onload = function () {
         valmis.addEventListener('click', click);
 
         function click() {
+            //Muokkaus tietokantaan
+            let editrequest = new XMLHttpRequest();
+            editrequest.open("POST", "/posttaulukko1", true);
+            let json;
+            editrequest.setRequestHeader("Content-Type", "application/json");
+            editrequest.onreadystatechange = function() {
+                if (editrequest.readyState !== 4 && editrequest.status !== 200) {
+                    alert("Yhteysongelma - tiedot eivät välttämättä välity palvelimelle.");
+                }
+            }
+
+            json = JSON.stringify({
+                id: idlaskuri,
+                rivi: row,
+                otsikko: uusiotsikko.value,
+                teksti: uusiteksti.value,
+                edit: "true",
+            });
+            editrequest.send(json);
+
             otsikko.innerText = uusiotsikko.value;
             teksti.innerText = uusiteksti.value;
 
