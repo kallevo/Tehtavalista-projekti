@@ -51,7 +51,7 @@ app.post("/posttaulukko1", urlencodedParser, function (req, res) {
 });
 //Tietokannan arkistoon lisääminen ja taulukko1:stä poistaminen
 app.post("/postarkisto", urlencodedParser, function (req, res) {
-    let sql1, sql2, sql3;
+    let sql1, sql2, sql3, sql4;
     console.log("body: %j", req.body);
     let jsonObj = req.body;
     console.log("Poiston id: " + jsonObj.id);
@@ -65,9 +65,9 @@ app.post("/postarkisto", urlencodedParser, function (req, res) {
     sql3 = "INSERT INTO Arkisto"
         + " SELECT * FROM taulukko1"
         + " WHERE rivi=?"
-        + " DELETE FROM taulukko1"
-        + " WHERE rivi=?"
 
+    sql4 = " DELETE FROM taulukko1"
+        + " WHERE rivi=?"
 
     let responseString = JSON.stringify(jsonObj)
     res.send("POST succesful: "+ responseString);
@@ -79,6 +79,7 @@ app.post("/postarkisto", urlencodedParser, function (req, res) {
             const result2 = await query(sql2, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
             } else if (jsonObj.montapoistoa === "true") {
                 const result3 = await query(sql3, [jsonObj.rivi, jsonObj.rivi]);
+                const result4 = await query(sql4, [jsonObj.rivi]);
             }
         }
         catch (err) {
