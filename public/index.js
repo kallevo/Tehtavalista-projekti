@@ -18,7 +18,11 @@ window.onload = function () {
                     add(i, '1', 'first', false);
                 }
             })
-
+            kategoriakentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    add(i, '1', 'first', false);
+                }
+            }),
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
                     add(i, '1', 'first', false);
@@ -30,6 +34,11 @@ window.onload = function () {
             });
         } else if (i === 2) {
             otsikkokentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    add(i, '2', 'second', false);
+                }
+            })
+            kategoriakentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
                     add(i, '2', 'second', false);
                 }
@@ -50,6 +59,11 @@ window.onload = function () {
                     add(i, '3', 'third', false);
                 }
             })
+            kategoriakentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    add(i, '3', 'third', false);
+                }
+            })
 
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
@@ -66,7 +80,11 @@ window.onload = function () {
                     add(i, '4', 'fourth', false);
                 }
             })
-
+            kategoriakentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    add(i, '4', 'fourth', false);
+                }
+            })
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
                     add(i, '4', 'fourth', false);
@@ -79,10 +97,11 @@ window.onload = function () {
         }
     }
 
-    function add(row, idlaskuri, divid, tietokannasta, otsikko, teksti) {
+    function add(row, idlaskuri, divid, tietokannasta, otsikko, kategoria, teksti) {
         let laskuri;
 
         let otsikkokentta = document.getElementById('otsikkokentta' + row);
+        let kategoriakentta = document.getElementById('kategoriakentta' + row);
         let tekstikentta = document.getElementById('tekstikentta' + row);
 
         if (tietokannasta) {
@@ -139,6 +158,7 @@ window.onload = function () {
                 id: laskuri,
                 rivi: row,
                 otsikko: otsikkokentta.value,
+                kategoria: kategoriakentta.value,
                 teksti: tekstikentta.value,
             });
             httprequest.send(json);
@@ -147,12 +167,15 @@ window.onload = function () {
             //Elementtien lisäys dom-puuhun.
             let divi = document.createElement('div');
             divi.setAttribute('id', 'diviotsikko' + row + laskuri)
+            let divi4 = document.createElement('div');
+            divi4.setAttribute('id', divikategoria + row + laskuri)
             let divi2 = document.createElement('div');
             divi2.setAttribute('id', 'diviteksti' + row + laskuri)
             let divi3 = document.createElement('div');
             divi3.setAttribute('id', 'divimenu' + row + laskuri)
             document.getElementById(divid).append(divi, divi2, divi3);
             divi.setAttribute('class', 'notehead');
+            divi4.setAttribute('class', 'note-category');
             divi2.setAttribute('class', 'note-text');
             divi3.setAttribute('class', 'note-menu');
 
@@ -162,6 +185,14 @@ window.onload = function () {
                 p.innerHTML = teksti;
             } else {
                 p.innerHTML = tekstikentta.value;
+            }
+            divi4.appendChild(p);
+            let c = document.createElement('p')
+                c.setAttribute('id','kategoria'+ row + laskuri)
+            if (tietokannasta){
+                p.innerHTML = kategoria;
+            } else {
+                p.innerHTML = kategoriakentta.value
             }
             divi2.appendChild(p);
             let h2 = document.createElement('h2');
