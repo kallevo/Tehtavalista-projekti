@@ -27,6 +27,10 @@ app.get("/index", function (req, res) {
     res.sendFile(__dirname + "/" + "index.html");
 })
 
+app.get("/archive", function (req, res) {
+    res.sendFile(__dirname + "/" + "archive.html");
+})
+
 //Tietokannan taulukko1:een lisääminen
 app.post("/posttaulukko1", urlencodedParser, function (req, res) {
     let sql1, sql2;
@@ -103,6 +107,28 @@ app.get("/gettaulukko1", function (req, res) {
     let sql = "SELECT *"
         + " FROM taulukko1"
         + " ORDER BY id";
+
+    (async () => { // IIFE (Immediately Invoked Function Expression)
+        try {
+            const rows = await query(sql);
+            string = JSON.stringify(rows);
+            let result = '{"numOfRows":' + rows.length + ', "rows":' + string + '}';
+            console.log("Rivejä: " + rows.length);
+            console.log(rows);
+            res.send(result);
+        }
+        catch (err) {
+            console.log("Database error!"+ err);
+        }
+    })()
+});
+
+app.get("/getarkisto", function (req, res) {
+    let string;
+
+    let sql = "SELECT *"
+        + " FROM Arkisto"
+        + " ORDER BY database_id";
 
     (async () => { // IIFE (Immediately Invoked Function Expression)
         try {
