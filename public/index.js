@@ -146,11 +146,11 @@ window.onload = function () {
 
             //Elementtien lisäys dom-puuhun.
             let divi = document.createElement('div');
-            divi.setAttribute('id', 'diviotsikko' + row + laskuri)
+            divi.setAttribute('id', 'diviotsikko' + row + laskuri);
             let divi2 = document.createElement('div');
-            divi2.setAttribute('id', 'diviteksti' + row + laskuri)
+            divi2.setAttribute('id', 'diviteksti' + row + laskuri);
             let divi3 = document.createElement('div');
-            divi3.setAttribute('id', 'divimenu' + row + laskuri)
+            divi3.setAttribute('id', 'divimenu' + row + laskuri);
             document.getElementById(divid).append(divi, divi2, divi3);
             divi.setAttribute('class', 'notehead');
             divi2.setAttribute('class', 'note-text');
@@ -163,6 +163,7 @@ window.onload = function () {
             } else {
                 p.innerHTML = tekstikentta.value;
             }
+
             divi2.appendChild(p);
             let h2 = document.createElement('h2');
             h2.setAttribute('id', 'otsikko' + row + laskuri);
@@ -172,6 +173,7 @@ window.onload = function () {
             } else {
                 h2.innerHTML = otsikkokentta.value;
             }
+
         let pmenu = document.createElement('p');
         pmenu.setAttribute('id', 'menu' + row + laskuri);
         pmenu.setAttribute('class', 'ikonit');
@@ -183,7 +185,6 @@ window.onload = function () {
         } else {
             pmenu.innerHTML = "<i class=\"fas fa-check-square\"></i>";
         }
-
 
 
             //Muistiinpanon poisto ja muokkaus.

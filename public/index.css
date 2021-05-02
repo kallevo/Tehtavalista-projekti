@@ -135,6 +135,10 @@ li border {
     min-width: 300px;
 }
 
+#archivememos {
+
+}
+
 body.front li#frontpg {
     background-color: #2faffa;
     color: floralwhite;
