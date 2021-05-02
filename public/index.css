@@ -136,7 +136,8 @@ li border {
 }
 
 #archivememos {
-
+    display: inline-block;
+    width: 100%;
 }
 
 body.front li#frontpg {
@@ -171,6 +172,7 @@ li:hover {
 
 .notehead {
     width: 65%;
+    max-width: 320px;
     min-height: 26px;
     background: rgb(2,0,36);
     background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(125,151,255,1) 0%, rgba(41,119,252,1) 99%, rgba(255,255,255,1) 100%);
@@ -181,6 +183,7 @@ li:hover {
     border-radius: 15px 15px 0 0;
     color: floralwhite;
     box-shadow: 4px 8px 15px #888888;
+
 }
 
 .notehead h2 {
@@ -190,6 +193,7 @@ li:hover {
 
 .note-text {
     width: 65%;
+    max-width: 320px;
     background-color: floralwhite;
     margin-left: 15%;
     margin-right: 15%;
