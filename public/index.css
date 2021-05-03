@@ -202,6 +202,17 @@ li:hover {
     color: #4353b1;
     box-shadow: 4px 8px 15px #888888;
 }
+.note-category {
+    width: 65%;
+    max-width: 320px;
+    background-color: floralwhite;
+    margin-left: 15%;
+    margin-right: 15%;
+    font-size: 1.1em;
+    padding: 8px;
+    color: gray;
+    box-shadow: 4px 8px 15px #888888;
+}
 
 .note-menu {
     width: 65%;
