@@ -17,8 +17,16 @@ window.onload = function () {
                 if (event.keyCode === 13) {
                     add(i, '1', 'first', false);
                 }
+                if (otsikkokentta.length > 30){
+                    alert("Max. 30 kirjainta!");
+                    return false;
+                }
             })
-
+            kategoriakentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    add(i, '1', 'first', false);
+                }
+            }),
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
                     add(i, '1', 'first', false);
@@ -30,6 +38,11 @@ window.onload = function () {
             });
         } else if (i === 2) {
             otsikkokentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    add(i, '2', 'second', false);
+                }
+            })
+            kategoriakentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
                     add(i, '2', 'second', false);
                 }
@@ -50,6 +63,11 @@ window.onload = function () {
                     add(i, '3', 'third', false);
                 }
             })
+            kategoriakentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    add(i, '3', 'third', false);
+                }
+            })
 
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
@@ -66,7 +84,11 @@ window.onload = function () {
                     add(i, '4', 'fourth', false);
                 }
             })
-
+            kategoriakentta.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    add(i, '4', 'fourth', false);
+                }
+            })
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
                     add(i, '4', 'fourth', false);
@@ -79,10 +101,11 @@ window.onload = function () {
         }
     }
 
-    function add(row, idlaskuri, divid, tietokannasta, otsikko, teksti) {
+    function add(row, idlaskuri, divid, tietokannasta, otsikko, kategoria, teksti) {
         let laskuri;
 
         let otsikkokentta = document.getElementById('otsikkokentta' + row);
+        let kategoriakentta = document.getElementById('kategoriakentta' + row);
         let tekstikentta = document.getElementById('tekstikentta' + row);
 
         if (tietokannasta) {
@@ -139,6 +162,7 @@ window.onload = function () {
                 id: laskuri,
                 rivi: row,
                 otsikko: otsikkokentta.value,
+                kategoria: kategoriakentta.value,
                 teksti: tekstikentta.value,
                 edit: "false",
             });
@@ -148,12 +172,15 @@ window.onload = function () {
             //Elementtien lisäys dom-puuhun.
             let divi = document.createElement('div');
             divi.setAttribute('id', 'diviotsikko' + row + laskuri);
+            let divi4 = document.createElement('div');
+            divi4.setAttribute('id', 'divikategoria' + row + laskuri);
             let divi2 = document.createElement('div');
             divi2.setAttribute('id', 'diviteksti' + row + laskuri);
             let divi3 = document.createElement('div');
             divi3.setAttribute('id', 'divimenu' + row + laskuri);
-            document.getElementById(divid).append(divi, divi2, divi3);
+            document.getElementById(divid).append(divi, divi4, divi2, divi3);
             divi.setAttribute('class', 'notehead');
+            divi4.setAttribute('class', 'note-category');
             divi2.setAttribute('class', 'note-text');
             divi3.setAttribute('class', 'note-menu');
 
@@ -164,7 +191,14 @@ window.onload = function () {
             } else {
                 p.innerHTML = tekstikentta.value;
             }
-
+            divi4.appendChild(p);
+            let c = document.createElement('p')
+                c.setAttribute('id','kategoria'+ row + laskuri)
+            if (tietokannasta){
+                p.innerHTML = kategoria;
+            } else {
+                p.innerHTML = kategoriakentta.value
+            }
             divi2.appendChild(p);
             let h2 = document.createElement('h2');
             h2.setAttribute('id', 'otsikko' + row + laskuri);
@@ -242,13 +276,16 @@ window.onload = function () {
 
     }
 
-    function edit(otsikkoid, tekstiid, otsikondiviid, tekstindiviid, muokkausnappiid, idlaskuri, row) {
+    function edit(otsikkoid, //kategoriaid
+                  tekstiid, otsikondiviid, tekstindiviid, muokkausnappiid) {
         let otsikko = document.getElementById(otsikkoid);
+        // let kategoria = document.getElementById(kategoriaid);
         let teksti = document.getElementById(tekstiid);
         let ogmuokkaus = document.getElementById(muokkausnappiid);
         ogmuokkaus.style.display = 'none';
 
         let otsikondivi = document.getElementById(otsikondiviid);
+        //let kategoraidivi = document.getElementById(kategoriaid)
         let tekstindivi = document.getElementById(tekstindiviid);
 
         let uusiotsikko = document.createElement('input');
@@ -264,6 +301,7 @@ window.onload = function () {
         tekstindivi.appendChild(valmis);
 
         uusiotsikko.value += otsikko.innerText;
+        //uusikategoria.value += kategoria.innerText;
         uusiteksti.value += teksti.innerText;
 
         uusiotsikko.addEventListener('keyup', function (event) {
@@ -302,6 +340,7 @@ window.onload = function () {
             editrequest.send(json);
 
             otsikko.innerText = uusiotsikko.value;
+            //kategoria.innerText = uusikategoria.value;
             teksti.innerText = uusiteksti.value;
 
             uusiotsikko.remove();
