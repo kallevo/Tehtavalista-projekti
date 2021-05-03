@@ -17,6 +17,10 @@ window.onload = function () {
                 if (event.keyCode === 13) {
                     add(i, '1', 'first', false);
                 }
+                if (otsikkokentta.length > 30){
+                    alert("Max. 30 kirjainta!");
+                    return false;
+                }
             })
             kategoriakentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
@@ -168,7 +172,7 @@ window.onload = function () {
             let divi = document.createElement('div');
             divi.setAttribute('id', 'diviotsikko' + row + laskuri)
             let divi4 = document.createElement('div');
-            divi4.setAttribute('id', divikategoria + row + laskuri)
+            divi4.setAttribute('id', 'divikategoria' + row + laskuri)
             let divi2 = document.createElement('div');
             divi2.setAttribute('id', 'diviteksti' + row + laskuri)
             let divi3 = document.createElement('div');
@@ -265,13 +269,16 @@ window.onload = function () {
 
     }
 
-    function edit(otsikkoid, tekstiid, otsikondiviid, tekstindiviid, muokkausnappiid) {
+    function edit(otsikkoid, //kategoriaid
+                  tekstiid, otsikondiviid, tekstindiviid, muokkausnappiid) {
         let otsikko = document.getElementById(otsikkoid);
+        // let kategoria = document.getElementById(kategoriaid);
         let teksti = document.getElementById(tekstiid);
         let ogmuokkaus = document.getElementById(muokkausnappiid);
         ogmuokkaus.style.display = 'none';
 
         let otsikondivi = document.getElementById(otsikondiviid);
+        //let kategoraidivi = document.getElementById(kategoriaid)
         let tekstindivi = document.getElementById(tekstindiviid);
 
         let uusiotsikko = document.createElement('input');
@@ -287,6 +294,7 @@ window.onload = function () {
         tekstindivi.appendChild(valmis);
 
         uusiotsikko.value += otsikko.innerText;
+        //uusikategoria.value += kategoria.innerText;
         uusiteksti.value += teksti.innerText;
 
         uusiotsikko.addEventListener('keyup', function (event) {
@@ -305,6 +313,7 @@ window.onload = function () {
 
         function click() {
             otsikko.innerText = uusiotsikko.value;
+            //kategoria.innerText = uusikategoria.value;
             teksti.innerText = uusiteksti.value;
 
             uusiotsikko.remove();
