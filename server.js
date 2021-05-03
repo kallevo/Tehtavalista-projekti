@@ -33,7 +33,7 @@ app.get("/archive", function (req, res) {
 
 //Tietokannan taulukko1:een lisääminen
 app.post("/posttaulukko1", urlencodedParser, function (req, res) {
-    let sql1, sql2;
+    let sql1, sql2, sql3;
     console.log("body: %j", req.body);
     let jsonObj = req.body;
     console.log("Otsikko: " + jsonObj.otsikko);
@@ -43,7 +43,11 @@ app.post("/posttaulukko1", urlencodedParser, function (req, res) {
 
     sql2 = "UPDATE taulukko1"
         + " SET otsikko=?, teksti=?"
-        + " WHERE id=? AND rivi=?"
+        + " WHERE id=? AND rivi=?";
+
+    sql3 = "UPDATE taulukko1"
+        + " SET valmis=?"
+        + " WHERE id=? AND rivi=?";
 
     let responseString = JSON.stringify(jsonObj)
     res.send("POST succesful: "+ responseString);
@@ -54,6 +58,8 @@ app.post("/posttaulukko1", urlencodedParser, function (req, res) {
                 const result = await query(sql1, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
             } else if (jsonObj.edit === "true") {
                 const result = await query(sql2, [jsonObj.otsikko, jsonObj.teksti, jsonObj.id , jsonObj.rivi]);
+            } else if (jsonObj.valmis === "true") {
+                const result = await query(sql3, [jsonObj.valmis, jsonObj.id , jsonObj.rivi]);
             }
         }
         catch (err) {

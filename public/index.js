@@ -101,7 +101,7 @@ window.onload = function () {
         }
     }
 
-    function add(row, idlaskuri, divid, tietokannasta, otsikko, kategoria, teksti) {
+    function add(row, idlaskuri, divid, tietokannasta, otsikko, kategoria, teksti, valmis) {
         let laskuri;
 
         let otsikkokentta = document.getElementById('otsikkokentta' + row);
@@ -188,6 +188,9 @@ window.onload = function () {
             p.setAttribute('id', 'teksti' + row + laskuri)
             if (tietokannasta) {
                 p.innerHTML = teksti;
+                if (valmis) {
+                    p.style.textDecoration = "line-through";
+                }
             } else {
                 p.innerHTML = tekstikentta.value;
             }
@@ -205,32 +208,45 @@ window.onload = function () {
             divi.appendChild(h2);
             if (tietokannasta) {
                 h2.innerHTML = otsikko;
+                if (valmis) {
+                    h2.style.textDecoration = "line-through";
+                    divi.style.background = "rgb(90,220,100)";
+                }
             } else {
                 h2.innerHTML = otsikkokentta.value;
             }
 
-        let pmenu = document.createElement('p');
-        pmenu.setAttribute('id', 'menu' + row + laskuri);
-        pmenu.setAttribute('class', 'ikonit');
-        divi3.setAttribute('class', 'note-menu');
-        divi3.appendChild(pmenu);
+            if (valmis === undefined) {
+                let pmenu = document.createElement('p');
+                pmenu.setAttribute('id', 'menu' + row + laskuri);
+                pmenu.setAttribute('class', 'ikonit');
+                divi3.setAttribute('class', 'note-menu');
+                divi3.appendChild(pmenu);
+                pmenu.addEventListener("click", function () {
+                    done(laskuri, row);
+                    pmenu.remove();
+                    document.getElementById("muokkaa" + row + laskuri).remove();
+                    p.style.textDecoration = "line-through";
+                    h2.style.textDecoration = "line-through";
+                    divi.style.background = "rgb(90,220,100)";
+                })
 
-        if (tietokannasta) {
-            pmenu.innerHTML = "<i class=\"fas fa-check-square\">";
-        } else {
-            pmenu.innerHTML = "<i class=\"fas fa-check-square\"></i>";
-        }
+            if (tietokannasta) {
+                pmenu.innerHTML = "<i class=\"fas fa-check-square\">";
+            } else {
+                pmenu.innerHTML = "<i class=\"fas fa-check-square\"></i>";
+            }
+            }
 
 
             //Muistiinpanon poisto ja muokkaus.
             let poista = document.createElement('div');
             poista.setAttribute('class', 'mdivb');
             poista.innerHTML = '<i class=\"fas fa-window-close\"></i>';
-            divi.appendChild(poista);
             poista.addEventListener('click', function () {
 
                 var dc = confirm("Haluatko varmasti poistaa tehtävän?");
-                if (dc == true) {
+                if (dc === true) {
                     //Tehdään poisto tietokannassa.
                     let postrequest = new XMLHttpRequest();
                     postrequest.open("POST", "/postarkisto", true);
@@ -257,23 +273,24 @@ window.onload = function () {
 
 
             })
+
+        if (valmis === undefined) {
             let muokkaus = document.createElement('div');
             muokkaus.setAttribute('id', 'muokkaa' + row + laskuri);
             muokkaus.setAttribute('class', 'muokkaus');
             muokkaus.innerHTML += '<i class=\"fas fa-pen-square\"></i>';
-            muokkaus.addEventListener('click', function() {
+            muokkaus.addEventListener('click', function () {
                 edit(h2.id, p.id, divi.id, divi2.id, muokkaus.id, laskuri, row);
             });
 
             divi3.appendChild(muokkaus);
+
+        }
             divi3.appendChild(poista);
 
             //Laitetaan lopuksi kentät tyhjiksi.
             otsikkokentta.value = "";
             tekstikentta.value = "";
-
-
-
     }
 
     function edit(otsikkoid, //kategoriaid
@@ -353,6 +370,25 @@ window.onload = function () {
         }
     }
 
+    function done(idlaskuri, row) {
+        let donerequest = new XMLHttpRequest();
+        donerequest.open("POST", "/posttaulukko1", true);
+        let json;
+        donerequest.setRequestHeader("Content-Type", "application/json");
+        donerequest.onreadystatechange = function() {
+            if (donerequest.readyState !== 4 && donerequest.status !== 200) {
+                alert("Yhteysongelma - tiedot eivät välttämättä välity palvelimelle.");
+            }
+        }
+
+        json = JSON.stringify({
+            id: idlaskuri,
+            rivi: row,
+            valmis: "true",
+        });
+        donerequest.send(json);
+    }
+
     function loadDb() {
         let gethttprequest = new XMLHttpRequest();
         gethttprequest.open("GET", "/gettaulukko1", true);
@@ -366,6 +402,7 @@ window.onload = function () {
                     for (let i in json.rows) {
                         let idlaskuri;
                         let divid;
+                        let valmis;
 
                         if (json.rows[i].rivi === 1) {
                             idlaskuri = '1';
@@ -384,7 +421,14 @@ window.onload = function () {
                             idlaskuri4 = json.rows[i].id;
                             divid = 'fourth'
                         }
-                        add(json.rows[i].rivi, idlaskuri, divid, true, json.rows[i].otsikko, json.rows[i].teksti);
+                        if (json.rows[i].valmis === "true") {
+                            console.log("true");
+                            valmis = true;
+                        } else if (json.rows[i].valmis === "false") {
+                            console.log("false");
+                            valmis = false;
+                        }
+                        add(json.rows[i].rivi, idlaskuri, divid, true, json.rows[i].otsikko, json.rows[i].teksti, valmis);
                         console.log("lisätty");
                     }
                 } else {
@@ -408,7 +452,7 @@ function hideForm(row) {
 function removeAll(row) {
 
     var dac = confirm("Haluatko varmasti poistaa kaikki tehtävät tästä kategoriasta?");
-    if (dac == true) {
+    if (dac === true) {
 
         let maara;
 
