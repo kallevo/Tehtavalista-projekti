@@ -144,7 +144,7 @@ window.onload = function () {
 
         if (!tietokannasta) {
             //Katsotaan onko joku kenttä tyhjä.
-            if (otsikkokentta.value === "" || tekstikentta.value === "") {
+            if (otsikkokentta.value === "" || tekstikentta.value === "" || kategoriakentta.value === "") {
                 return false;
             }
             //Tietokantaan lisääminen XMLHttpRequestin avulla
@@ -194,15 +194,15 @@ window.onload = function () {
             } else {
                 p.innerHTML = tekstikentta.value;
             }
-            divi4.appendChild(p);
+            divi2.appendChild(p);
             let c = document.createElement('p')
                 c.setAttribute('id','kategoria'+ row + laskuri)
             if (tietokannasta){
-                p.innerHTML = kategoria;
+                c.innerHTML = kategoria;
             } else {
-                p.innerHTML = kategoriakentta.value
+                c.innerHTML = kategoriakentta.value
             }
-            divi2.appendChild(p);
+            divi4.appendChild(c);
             let h2 = document.createElement('h2');
             h2.setAttribute('id', 'otsikko' + row + laskuri);
             divi.appendChild(h2);
@@ -262,6 +262,7 @@ window.onload = function () {
                         id: laskuri,
                         rivi: row,
                         otsikko: h2.innerText,
+
                         teksti: p.innerText,
                         montapoistoa: "false",
                     });
@@ -269,6 +270,7 @@ window.onload = function () {
                     divi.remove();
                     divi2.remove();
                     divi3.remove();
+                    divi4.remove();
                 }
 
 
@@ -293,32 +295,35 @@ window.onload = function () {
             tekstikentta.value = "";
     }
 
-    function edit(otsikkoid, //kategoriaid
-                  tekstiid, otsikondiviid, tekstindiviid, muokkausnappiid, idlaskuri, row) {
+    function edit(otsikkoid, kategoriaid,
+                  tekstiid, otsikondiviid, tekstindiviid, muokkausnappiid) {
         let otsikko = document.getElementById(otsikkoid);
-        // let kategoria = document.getElementById(kategoriaid);
+        let kategoria = document.getElementById(kategoriaid);
         let teksti = document.getElementById(tekstiid);
         let ogmuokkaus = document.getElementById(muokkausnappiid);
         ogmuokkaus.style.display = 'none';
 
         let otsikondivi = document.getElementById(otsikondiviid);
-        //let kategoraidivi = document.getElementById(kategoriaid)
+        let kategoriandivi = document.getElementById(kategoriaid)
         let tekstindivi = document.getElementById(tekstindiviid);
 
         let uusiotsikko = document.createElement('input');
         let uusiteksti = document.createElement('input');
+        let uusikategoria = document.createElement('input');
 
         otsikko.style.display = 'none';
         teksti.style.display = 'none';
+        kategoria.style.display = 'none';
         otsikondivi.appendChild(uusiotsikko);
         tekstindivi.appendChild(uusiteksti);
+        kategoriandivi.appendChild(uusikategoria);
 
         let valmis = document.createElement('button');
         valmis.innerText += 'valmis';
         tekstindivi.appendChild(valmis);
 
         uusiotsikko.value += otsikko.innerText;
-        //uusikategoria.value += kategoria.innerText;
+        uusikategoria.value += kategoria.innerText;
         uusiteksti.value += teksti.innerText;
 
         uusiotsikko.addEventListener('keyup', function (event) {
@@ -351,19 +356,22 @@ window.onload = function () {
                 id: idlaskuri,
                 rivi: row,
                 otsikko: uusiotsikko.value,
+                kategoria: uusikategoria.value,
                 teksti: uusiteksti.value,
                 edit: "true",
             });
             editrequest.send(json);
 
             otsikko.innerText = uusiotsikko.value;
-            //kategoria.innerText = uusikategoria.value;
+            kategoria.innerText = uusikategoria.value;
             teksti.innerText = uusiteksti.value;
 
             uusiotsikko.remove();
             uusiteksti.remove();
+            uusikategoria.remove();
             otsikko.style.display = 'block';
             teksti.style.display = 'block';
+            kategoria.style.display = 'block';
 
             valmis.remove();
             ogmuokkaus.style.display = 'inline-block';
@@ -518,6 +526,7 @@ function removeAll(row) {
             if (document.body.contains(document.getElementById('diviotsikko' + row + i))) {
                 console.log(row + "," + i + "," + maara);
                 document.getElementById('diviotsikko' + row + i).remove();
+                document.getElementById('divikategoria'+ row + i).remove();
                 document.getElementById('divimenu' + row + i).remove();
                 document.getElementById('diviteksti' + row + i).remove();
             } else {
