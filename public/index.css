@@ -196,9 +196,12 @@ li:hover {
     box-shadow: 4px 8px 15px #888888;
 }
 .note-category {
-    text-align: left;
+    text-align: center;
+    width: 65%;
     max-width: 320px;
     background-color: floralwhite;
+    margin-left: 15%;
+    margin-right: 15%;
     font-size: 1.1em;
     padding: 8px;
     color: gray;
@@ -268,6 +271,17 @@ li:hover {
     padding: 6px;
     margin-left: 10%;
     margin-right: 10%;
+}
+.kategoriakentta {
+    border: 0px;
+    background: transparent;
+    font-size: 1.2em;
+    text-align: center;
+    width: 200px;
+    top: 50%;
+    left: 50%;
+    margin: auto;
+    display: block;
 }
 
 .otsikkokentta {
@@ -369,27 +383,6 @@ li:hover {
     color: red;
     padding-left: 3px;
     display: inline-block;
-}
-
-.fa-plus-square {
-    font-size: 50px;
-    color: #0f7ab0;
-}
-
-.fa-trash-alt {
-    font-size: 36px;
-    color: #313131;
-}
-
-.fa-plus-square:hover {
-    color: #50abe3;
-    cursor: pointer;
-}
-
-.fa-trash-alt:hover {
-    font-size: 36px;
-    cursor: pointer;
-    color: #606060;
 }
 
 .fa-check-square:hover {
