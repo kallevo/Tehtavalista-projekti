@@ -38,8 +38,8 @@ app.post("/posttaulukko1", urlencodedParser, function (req, res) {
     let jsonObj = req.body;
     console.log("Otsikko: " + jsonObj.otsikko);
 
-    sql1 = "INSERT INTO taulukko1(id, rivi, otsikko, teksti)"
-        + " VALUES ( ?, ?, ?, ?)";
+    sql1 = "INSERT INTO taulukko1(id, rivi, kategoria, otsikko, teksti)"
+        + " VALUES ( ?, ?, ?, ?, ?)";
 
     sql2 = "UPDATE taulukko1"
         + " SET otsikko=?, teksti=?"
@@ -55,7 +55,7 @@ app.post("/posttaulukko1", urlencodedParser, function (req, res) {
     (async () => { // IIFE (Immediately Invoked Function Expression)
         try {
             if (jsonObj.edit === "false") {
-                const result = await query(sql1, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
+                const result = await query(sql1, [jsonObj.id, jsonObj.rivi, jsonObj.kategoria, jsonObj.otsikko, jsonObj.teksti]);
             } else if (jsonObj.edit === "true") {
                 const result = await query(sql2, [jsonObj.otsikko, jsonObj.teksti, jsonObj.id , jsonObj.rivi]);
             } else if (jsonObj.valmis === "true") {
@@ -77,8 +77,8 @@ app.post("/postarkisto", urlencodedParser, function (req, res) {
     sql1 = "DELETE FROM taulukko1"
         + " WHERE id=? AND rivi=?"
 
-    sql2 = "INSERT INTO Arkisto(id, rivi, otsikko, teksti)"
-        + " VALUES ( ?, ?, ?, ?)"
+    sql2 = "INSERT INTO Arkisto(id, rivi, kategoria, otsikko, teksti)"
+        + " VALUES ( ?, ?, ?, ?, ?)"
 
     sql3 = "INSERT INTO Arkisto"
         + " SELECT * FROM taulukko1"
@@ -94,7 +94,7 @@ app.post("/postarkisto", urlencodedParser, function (req, res) {
         try {
             if (jsonObj.montapoistoa === "false") {
                 const result1 = await query(sql1, [jsonObj.id, jsonObj.rivi]);
-                const result2 = await query(sql2, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
+                const result2 = await query(sql2, [jsonObj.id, jsonObj.rivi, jsonObj.kategoria, jsonObj.otsikko, jsonObj.teksti]);
             } else if (jsonObj.montapoistoa === "true") {
                 const result3 = await query(sql3, [jsonObj.rivi]);
                 const result4 = await query(sql4, [jsonObj.rivi]);

@@ -26,7 +26,7 @@ window.onload = function () {
                 if (event.keyCode === 13) {
                     add(i, '1', 'first', false);
                 }
-            }),
+            })
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
                     add(i, '1', 'first', false);
@@ -262,7 +262,7 @@ window.onload = function () {
                         id: laskuri,
                         rivi: row,
                         otsikko: h2.innerText,
-
+                        kategoria: c.innerText,
                         teksti: p.innerText,
                         montapoistoa: "false",
                     });
@@ -282,7 +282,7 @@ window.onload = function () {
             muokkaus.setAttribute('class', 'muokkaus');
             muokkaus.innerHTML += '<i class=\"fas fa-pen-square\"></i>';
             muokkaus.addEventListener('click', function () {
-                edit(h2.id, p.id, divi.id, divi2.id, muokkaus.id, laskuri, row);
+                edit(h2.id, c.id, p.id, divi.id, divi2.id, muokkaus.id, laskuri, row);
             });
 
             divi3.appendChild(muokkaus);
@@ -436,7 +436,7 @@ window.onload = function () {
                             console.log("false");
                             valmis = false;
                         }
-                        add(json.rows[i].rivi, idlaskuri, divid, true, json.rows[i].otsikko, json.rows[i].teksti, valmis);
+                        add(json.rows[i].rivi, idlaskuri, divid, true, json.rows[i].otsikko,json.rows[i].kategoria, json.rows[i].teksti, valmis);
                         console.log("lisätty");
                     }
                 } else {
