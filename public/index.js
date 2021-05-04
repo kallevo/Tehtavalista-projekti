@@ -170,6 +170,7 @@ window.onload = function () {
         }
 
             //Elementtien lisäys dom-puuhun.
+            let notecontaineri = document.createElement('div');
             let divi = document.createElement('div');
             divi.setAttribute('id', 'diviotsikko' + row + laskuri);
             let divi4 = document.createElement('div');
@@ -178,7 +179,9 @@ window.onload = function () {
             divi2.setAttribute('id', 'diviteksti' + row + laskuri);
             let divi3 = document.createElement('div');
             divi3.setAttribute('id', 'divimenu' + row + laskuri);
-            document.getElementById(divid).append(divi, divi4, divi2, divi3);
+            notecontaineri.append(divi,divi4, divi2, divi3);
+            document.getElementById(divid).append(notecontaineri);
+            notecontaineri.setAttribute('class','notecontaineri');
             divi.setAttribute('class', 'notehead');
             divi4.setAttribute('class', 'note-category');
             divi2.setAttribute('class', 'note-text');
