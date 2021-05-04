@@ -393,8 +393,9 @@ li:hover {
     color: #0f7ab0;
 }
 .fa-trash-alt {
-    font-size: 36px;
+    font-size: 26px;
     color: #313131;
+    padding-left: 6px;
 }
 
 .fa-plus-square:hover {
@@ -403,7 +404,7 @@ li:hover {
 }
 
 .fa-trash-alt:hover {
-    font-size: 36px;
+    font-size: 26px;
     cursor: pointer;
     color: #606060;
 }
