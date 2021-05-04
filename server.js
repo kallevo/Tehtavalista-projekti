@@ -96,7 +96,7 @@ app.post("/postarkisto", urlencodedParser, function (req, res) {
                 const result1 = await query(sql1, [jsonObj.id, jsonObj.rivi]);
                 const result2 = await query(sql2, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
             } else if (jsonObj.montapoistoa === "true") {
-                const result3 = await query(sql3, [jsonObj.rivi, jsonObj.rivi]);
+                const result3 = await query(sql3, [jsonObj.rivi]);
                 const result4 = await query(sql4, [jsonObj.rivi]);
             }
         }
