@@ -1,0 +1,385 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+/* resetoidaan tyylitiedostot muotoilun helpottamiseksi*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Muotoilu alkaa
+    tästä alaspain*/
+
+
+body {
+    background-color: aliceblue;
+    height: 100%;
+
+}
+
+#header-wrapper {
+    display: flex;
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(0,49,168,1) 0%, rgba(70,142,255,1) 100%);
+    height: 70px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 2.3em;
+    color: floralwhite;
+    padding: 15px;
+    font-family: 'Rubik', sans-serif;
+}
+
+#nav {
+    padding: 20px;
+}
+
+li {
+    display:inline-block;
+    background-color: aliceblue;
+    padding: 6px;
+    border-radius: 30px;
+    min-width: 130px;
+    text-align: center;
+    margin-left: 10px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.2em;
+    border: 2px solid floralwhite;
+}
+
+li border {
+    display:none;
+}
+
+#flex-container {
+    display: flex;
+    height: 1200px;
+}
+
+#first {
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(252,252,252,1) 0%, rgba(207,225,255,1) 90%, rgba(191,214,250,1) 100%);
+    flex-grow: 2;
+    align-items: stretch;
+    width: 25%;
+    min-width: 300px;
+}
+
+#second {
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(232,232,232,1) 0%, rgba(209,226,255,1) 90%, rgba(255,255,255,1) 100%);
+    flex-grow: 2;
+    align-items: stretch;
+    width: 25%;
+    min-width: 300px;
+}
+
+#third {
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(252,252,252,1) 0%, rgba(207,225,255,1) 90%, rgba(191,214,250,1) 100%);
+    flex-grow: 2;
+    align-items: stretch;
+    width: 25%;
+    min-width: 300px;
+}
+
+#fourth {
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(232,232,232,1) 0%, rgba(209,226,255,1) 90%, rgba(255,255,255,1) 100%);
+    flex-grow: 2;
+    align-items: stretch;
+    width: 25%;
+    min-width: 300px;
+}
+
+#archivememos {
+    display: inline-block;
+    width: 100%;
+}
+
+body.front li#frontpg {
+    background-color: #2faffa;
+    color: floralwhite;
+}
+
+body.archive li#archive {
+    background-color: #2faffa;
+    color: floralwhite;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:visited { border-color: #2faffa;
+            color: #0f7ab0;
+}
+
+a:active {
+    color: #2faffa;
+}
+
+li:hover {
+    border: 2px solid #6fd2ff;
+    color: #6fd2ff;
+}
+
+/* Muistiinpanolaatikoiden muotoilu */
+
+.notehead {
+    width: 65%;
+    max-width: 320px;
+    min-height: 26px;
+    background: rgb(2,0,36);
+    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(125,151,255,1) 0%, rgba(41,119,252,1) 99%, rgba(255,255,255,1) 100%);
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 20px;
+    padding: 8px;
+    border-radius: 15px 15px 0 0;
+    color: floralwhite;
+    box-shadow: 4px 8px 15px #888888;
+
+}
+
+.notehead h2 {
+    font-size: 1.6em;
+    float: left;
+}
+
+.note-text {
+    width: 65%;
+    max-width: 320px;
+    background-color: floralwhite;
+    margin-left: 15%;
+    margin-right: 15%;
+    font-size: 1.1em;
+    padding: 8px;
+    color: #4353b1;
+    box-shadow: 4px 8px 15px #888888;
+}
+
+.note-menu {
+    width: 65%;
+    background-color: #e0e0e0;
+    margin-left: 15%;
+    margin-right: 15%;
+    font-size: 0.7em;
+    text-align: center;
+    padding: 8px;
+    border-radius: 0 0 15px 15px;
+    color: #4353b1;
+    box-shadow: 4px 8px 15px #888888;
+    display: inline-block;
+}
+
+.new-note {
+    background-color: #2faffa;
+    color: floralwhite;
+    padding: 5px;
+    border-radius: 30px;
+    text-align: center;
+    margin-left: 10px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.2em;
+    border: 2px solid floralwhite;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 20px;
+    box-shadow: 2px 4px 10px #444444;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.new-note:hover {
+    border-color: #6fd2ff;
+    cursor: pointer;
+}
+
+#new1 {
+    margin-left: 70%;
+}
+
+.fields {
+    padding: 6px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.otsikkokentta {
+    width: 100%;
+}
+
+.tekstikentta {
+    width: 100%;
+    min-height: 100px;
+    margin-top: 10px;
+}
+
+#form-box1 {
+    background-color: #2faffa;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: none;
+}
+
+#form-box2 {
+    background-color: #2faffa;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: none;
+}
+
+#form-box3 {
+    background-color: #2faffa;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: none;
+}
+
+#form-box4 {
+    background-color: #2faffa;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: none;
+}
+
+/* sulkulaatikko */
+
+#mdiv {
+    width: 25px;
+    height: 25px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    margin-left: 2px;
+    float: right;
+}
+
+.mdiv {
+    height: 25px;
+    width: 2px;
+    margin-left: 12px;
+    background-color: black;
+    transform: rotate(45deg);
+    Z-index: 1;
+}
+
+.md {
+    height: 25px;
+    width: 2px;
+    background-color: black;
+    transform: rotate(90deg);
+    Z-index: 2;
+}
+
+/* Ikonien muotoilut */
+
+.fa-check-square {
+    font-size: 26px;
+    color: #259d00;
+    padding-left: 3px;
+    display: inline-block;
+}
+
+.fa-pen-square {
+    font-size: 26px;
+    color: #ffa500;
+    padding-left: 3px;
+    display: inline-block;
+}
+
+.fa-window-close {
+    font-size: 26px;
+    color: red;
+    padding-left: 3px;
+    display: inline-block;
+}
+
+.fa-check-square:hover {
+    font-size: 26px;
+    color: #154c00;
+    padding-left: 3px;
+    cursor: pointer;
+}
+
+.fa-pen-square:hover {
+    font-size: 26px;
+    color: #996700;
+    padding-left: 3px;
+    cursor: pointer;
+}
+
+.fa-window-close:hover {
+    font-size: 26px;
+    color: #6e0000;
+    padding-left: 3px;
+    cursor: pointer;
+}
+
+.muokkaus {
+    display: inline-block;
+}
+
+.ikonit {
+    display: inline-block;
+}
+
+.mdivb {
+    display: inline-block;
+}

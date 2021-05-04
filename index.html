@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Tehtävämuistio</title>
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="/index.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="/index.js"></script>
+    <script src="https://kit.fontawesome.com/9aa5f586da.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 </head>
 <body class="front">
 
@@ -13,36 +16,73 @@
     <h1> Tehtävämuistio </h1>
     <div id="nav">
     <ul>
-        <a href="index.html" class="ui-btn-active nav-border"> <li id="frontpg">  Etusivu </li> </a>
-        <a href="archive.html" class="nav-border"> <li id="archive">  Arkisto  </li></a>
+        <a href="/index" class="ui-btn-active nav-border"> <li id="frontpg">  Etusivu </li> </a>
+        <a href="/archive" class="nav-border"> <li id="archive">  Arkisto  </li></a>
     </ul>
     </div>
 </div>
 
 <div id="flex-container">
     <div id="first">
-
-        <div class="new-note">Uusi muistiinpano</div>
-
-        <div class="notehead"> <h2>Otsikko</h2> </div>
-        <div class="note-text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, beatae commodi deserunt dolorem ducimus ea hic id in laborum minima neque officiis omnis possimus quae tenetur velit voluptatem. Blanditiis, quae. </div>
-
+        <button class="new-note" onclick="hideForm(1)">Uusi tehtävä</button>
+        <button onclick="removeAll(1)">Poista kaikki</button>
+        <div id="form-box1">
+            <div class="fields">
+                <label>
+                <input class="otsikkokentta" id="otsikkokentta1" type="text" placeholder="Kirjoita otsikko..."> <br>
+                    <input class="kategoriakentta" id="kategoriakentta1" type="text" placeholder="Kirjoita kategoria..."> <br>
+                <input class="tekstikentta" id="tekstikentta1" type="text" placeholder="Kirjoita kuvaus...">
+                </label>
+            </div>
+            <button class="new-note" id="new1" >Lisää</button>
+        </div>
 
     </div>
 
     <div id="second">
-        <div class="new-note">Uusi muistiinpano</div>
+        <button class="new-note" onclick="hideForm(2)">Uusi tehtävä</button>
+        <button onclick="removeAll(2)">Poista kaikki</button>
+        <div id="form-box2">
+            <div class="fields">
+                <label>
+                    <input class="otsikkokentta" id="otsikkokentta2" type="text" placeholder="Kirjoita otsikko..."> <br>
+                    <input class="kategoriakentta" id="kategoriakentta2" type="text" placeholder="Kirjoita kategoria..."> <br>
+                    <input class="tekstikentta" id="tekstikentta2" type="text" placeholder="Kirjoita kuvaus...">
+                </label>
+            </div>
+        <button class="new-note" id="new2">Lisää</button>
+        </div>
     </div>
 
     <div id="third">
-        <div class="new-note">Uusi muistiinpano</div>
+        <button class="new-note" onclick="hideForm(3)">Uusi tehtävä</button>
+        <button onclick="removeAll(3)">Poista kaikki</button>
+        <div id="form-box3">
+            <div class="fields">
+                <label>
+                    <input class="otsikkokentta" id="otsikkokentta3" type="text" placeholder="Kirjoita otsikko..."> <br>
+                    <input class="kategoriakentta" id="kategoriakentta3" type="text" placeholder="Kirjoita kategoria..."> <br>
+                    <input class="tekstikentta" id="tekstikentta3" type="text" placeholder="Kirjoita kuvaus...">
+                </label>
+            </div>
+        <button class="new-note" id="new3">Lisää</button>
+        </div>
     </div>
 
     <div id="fourth">
-        <div class="new-note">Uusi muistiinpano</div>
+        <button class="new-note" onclick="hideForm(4)">Uusi tehtävä</button>
+        <button onclick="removeAll(4)">Poista kaikki</button>
+        <div id="form-box4">
+            <div class="fields">
+                <label>
+                    <input class="otsikkokentta" id="otsikkokentta4" type="text" placeholder="Kirjoita otsikko..."> <br>
+                    <input class="kategoriakentta" id="kategoriakentta4" type="text" placeholder="Kirjoita kategoria..."> <br>
+                    <input class="tekstikentta" id="tekstikentta4" type="text" placeholder="Kirjoita kuvaus...">
+                </label>
+            </div>
+        <button class="new-note" id="new4">Lisää</button>
+        </div>
     </div>
-
-
 
 </div>
 
