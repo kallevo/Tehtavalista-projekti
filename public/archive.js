@@ -29,6 +29,10 @@ gethttprequest.onreadystatechange = function() {
                 let h2 = document.createElement('h2');
                 h2.innerHTML = otsikko;
                 divi.appendChild(h2);
+                if (json.rows[i].valmis === "true") {
+                    divi.style.background = "rgb(90,220,100)";
+                    h2.innerHTML += " (tehty)";
+                }
             }
         } else {
             alert("Tietoja ei löytynyt tietokannasta.")
