@@ -117,6 +117,7 @@ li border {
     align-items: stretch;
     width: 25%;
     min-width: 300px;
+    text-align: center;
 
 }
 
@@ -126,6 +127,7 @@ li border {
     align-items: stretch;
     width: 25%;
     min-width: 300px;
+    text-align: center;
 }
 
 #fourth {
@@ -134,6 +136,7 @@ li border {
     align-items: stretch;
     width: 25%;
     min-width: 300px;
+    text-align: center;
 }
 
 #archivememos {
