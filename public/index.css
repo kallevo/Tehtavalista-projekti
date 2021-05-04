@@ -385,6 +385,26 @@ li:hover {
     display: inline-block;
 }
 
+.fa-plus-square {
+    font-size: 50px;
+    color: #0f7ab0;
+}
+.fa-trash-alt {
+    font-size: 36px;
+    color: #313131;
+}
+
+.fa-plus-square:hover {
+    color: #50abe3;
+    cursor: pointer;
+}
+
+.fa-trash-alt:hover {
+    font-size: 36px;
+    cursor: pointer;
+    color: #606060;
+}
+
 .fa-check-square:hover {
     font-size: 26px;
     color: #154c00;
