@@ -459,6 +459,7 @@ function hideForm(row) {
 
 function removeAll(row) {
 
+    console.log("Poiston rivi:" + row);
     var dac = confirm("Haluatko varmasti poistaa kaikki tehtävät tästä kategoriasta?");
     if (dac === true) {
 

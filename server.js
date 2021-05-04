@@ -73,6 +73,7 @@ app.post("/postarkisto", urlencodedParser, function (req, res) {
     console.log("body: %j", req.body);
     let jsonObj = req.body;
     console.log("Poiston id: " + jsonObj.id);
+    console.log("Poiston rivi: " + jsonObj.rivi);
 
     sql1 = "DELETE FROM taulukko1"
         + " WHERE id=? AND rivi=?"
@@ -84,7 +85,7 @@ app.post("/postarkisto", urlencodedParser, function (req, res) {
         + " SELECT * FROM taulukko1"
         + " WHERE rivi=?"
 
-    sql4 = " DELETE FROM taulukko1"
+    sql4 = "DELETE FROM taulukko1"
         + " WHERE rivi=?"
 
     let responseString = JSON.stringify(jsonObj)
