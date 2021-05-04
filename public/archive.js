@@ -12,9 +12,12 @@ gethttprequest.onreadystatechange = function() {
                 let teksti = json.rows[i].teksti;
                 let otsikko = json.rows[i].otsikko;
                 //Elementtien lisäys dom-puuhun.
+                let notecontainer = document.createElement('div');
                 let divi = document.createElement('div');
                 let divi2 = document.createElement('div');
-                document.getElementById("archivememos").append(divi,divi2);
+                document.getElementById("archivememos").append(notecontainer);
+                notecontainer.append(divi,divi2);
+                notecontainer.setAttribute('class', 'notecontainer');
                 divi.setAttribute('class', 'notehead');
                 divi2.setAttribute('class', 'note-text');
 
