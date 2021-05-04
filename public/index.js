@@ -296,7 +296,7 @@ window.onload = function () {
     }
 
     function edit(otsikkoid, kategoriaid,
-                  tekstiid, otsikondiviid, tekstindiviid, muokkausnappiid) {
+                  tekstiid, otsikondiviid, tekstindiviid, muokkausnappiid, idlaskuri, row) {
         let otsikko = document.getElementById(otsikkoid);
         let kategoria = document.getElementById(kategoriaid);
         let teksti = document.getElementById(tekstiid);
