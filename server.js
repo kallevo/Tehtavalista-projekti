@@ -33,13 +33,13 @@ app.get("/archive", function (req, res) {
 
 //Tietokannan taulukko1:een lisääminen
 app.post("/posttaulukko1", urlencodedParser, function (req, res) {
-    let sql1, sql2, sql3;
+    let sql1, sql2, sql3, sql4;
     console.log("body: %j", req.body);
     let jsonObj = req.body;
     console.log("Otsikko: " + jsonObj.otsikko);
 
-    sql1 = "INSERT INTO taulukko1(id, rivi, kategoria, otsikko, teksti)"
-        + " VALUES ( ?, ?, ?, ?, ?)";
+    sql1 = "INSERT INTO taulukko1(id, rivi, otsikko, teksti)"
+        + " VALUES ( ?, ?, ?, ?)";
 
     sql2 = "UPDATE taulukko1"
         + " SET otsikko=?, teksti=?"
@@ -49,17 +49,23 @@ app.post("/posttaulukko1", urlencodedParser, function (req, res) {
         + " SET valmis=?"
         + " WHERE id=? AND rivi=?";
 
+    sql4 = "UPDATE taulukko1"
+        + " SET kategoria=?"
+        + " WHERE rivi=?";
+
     let responseString = JSON.stringify(jsonObj)
     res.send("POST succesful: "+ responseString);
 
     (async () => { // IIFE (Immediately Invoked Function Expression)
         try {
             if (jsonObj.edit === "false") {
-                const result = await query(sql1, [jsonObj.id, jsonObj.rivi, jsonObj.kategoria, jsonObj.otsikko, jsonObj.teksti]);
+                const result = await query(sql1, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
             } else if (jsonObj.edit === "true") {
                 const result = await query(sql2, [jsonObj.otsikko, jsonObj.teksti, jsonObj.id , jsonObj.rivi]);
             } else if (jsonObj.valmis === "true") {
                 const result = await query(sql3, [jsonObj.valmis, jsonObj.id , jsonObj.rivi]);
+            } else if (jsonObj.kategoria !== undefined) {
+                const result = await query(sql4, [jsonObj.kategoria, jsonObj.rivi]);
             }
         }
         catch (err) {
@@ -75,11 +81,12 @@ app.post("/postarkisto", urlencodedParser, function (req, res) {
     console.log("Poiston id: " + jsonObj.id);
     console.log("Poiston rivi: " + jsonObj.rivi);
 
-    sql1 = "DELETE FROM taulukko1"
-        + " WHERE id=? AND rivi=?"
+    sql1 = "INSERT INTO Arkisto"
+        + " SELECT * FROM taulukko1"
+        + " WHERE rivi=? AND id=?"
 
-    sql2 = "INSERT INTO Arkisto(id, rivi, kategoria, otsikko, teksti)"
-        + " VALUES ( ?, ?, ?, ?, ?)"
+    sql2 = "DELETE FROM taulukko1"
+        + " WHERE rivi=? AND id=?"
 
     sql3 = "INSERT INTO Arkisto"
         + " SELECT * FROM taulukko1"
@@ -94,8 +101,8 @@ app.post("/postarkisto", urlencodedParser, function (req, res) {
     (async () => { // IIFE (Immediately Invoked Function Expression)
         try {
             if (jsonObj.montapoistoa === "false") {
-                const result1 = await query(sql1, [jsonObj.id, jsonObj.rivi]);
-                const result2 = await query(sql2, [jsonObj.id, jsonObj.rivi, jsonObj.kategoria, jsonObj.otsikko, jsonObj.teksti]);
+                const result1 = await query(sql1, [jsonObj.rivi, jsonObj.id]);
+                const result2 = await query(sql2, [jsonObj.rivi, jsonObj.id]);
             } else if (jsonObj.montapoistoa === "true") {
                 const result3 = await query(sql3, [jsonObj.rivi]);
                 const result4 = await query(sql4, [jsonObj.rivi]);
