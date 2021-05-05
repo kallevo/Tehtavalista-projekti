@@ -515,18 +515,16 @@ function removeAll(row) {
 
         //Elementtien poisto
         for (let i = maara; i >= 0; i--) {
-            if (document.body.contains(document.getElementById('diviotsikko' + row + i))) {
+            try {
                 console.log(row + "," + i + "," + maara);
                 document.getElementById('diviotsikko' + row + i).remove();
                 document.getElementById('divimenu' + row + i).remove();
                 document.getElementById('diviteksti' + row + i).remove();
                 document.getElementById('notecontaineri' + row + i).remove();
-            } else {
-                break;
+            } catch (e) {
+
             }
         }
 
     }
-
-
 }
