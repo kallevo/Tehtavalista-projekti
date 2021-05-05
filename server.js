@@ -38,8 +38,8 @@ app.post("/posttaulukko1", urlencodedParser, function (req, res) {
     let jsonObj = req.body;
     console.log("Otsikko: " + jsonObj.otsikko);
 
-    sql1 = "INSERT INTO taulukko1(id, rivi, otsikko, teksti)"
-        + " VALUES ( ?, ?, ?, ?)";
+    sql1 = "INSERT INTO taulukko1(id, rivi, kategoria, otsikko, teksti)"
+        + " VALUES ( ?, ?, ?, ?, ?)";
 
     sql2 = "UPDATE taulukko1"
         + " SET otsikko=?, teksti=?"
@@ -59,7 +59,7 @@ app.post("/posttaulukko1", urlencodedParser, function (req, res) {
     (async () => { // IIFE (Immediately Invoked Function Expression)
         try {
             if (jsonObj.edit === "false") {
-                const result = await query(sql1, [jsonObj.id, jsonObj.rivi, jsonObj.otsikko, jsonObj.teksti]);
+                const result = await query(sql1, [jsonObj.id, jsonObj.rivi, jsonObj.kategoria, jsonObj.otsikko, jsonObj.teksti]);
             } else if (jsonObj.edit === "true") {
                 const result = await query(sql2, [jsonObj.otsikko, jsonObj.teksti, jsonObj.id , jsonObj.rivi]);
             } else if (jsonObj.valmis === "true") {

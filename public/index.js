@@ -20,7 +20,7 @@ window.onload = function () {
         if (i === 1) {
             otsikkokentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '1', 'first', false);
+                    add(i, '1', 'first', false, kategoriakentta.value);
                 }
                 if (otsikkokentta.length > 30){
                     alert("Max. 30 kirjainta!");
@@ -30,60 +30,60 @@ window.onload = function () {
 
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '1', 'first', false);
+                    add(i, '1', 'first', false, kategoriakentta.value);
                 }
             })
 
             nappi.addEventListener('click', function () {
-                add(i, '1', 'first', false);
+                add(i, '1', 'first', false, kategoriakentta.value);
             });
         } else if (i === 2) {
             otsikkokentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '2', 'second', false);
+                    add(i, '2', 'second', false, kategoriakentta.value);
                 }
             })
 
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '2', 'second', false);
+                    add(i, '2', 'second', false, kategoriakentta.value);
                 }
             })
 
             nappi.addEventListener('click', function () {
-                add(i, '2', 'second', false);
+                add(i, '2', 'second', false, kategoriakentta.value);
             });
         } else if (i === 3) {
             otsikkokentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '3', 'third', false);
+                    add(i, '3', 'third', false, kategoriakentta.value);
                 }
             })
 
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '3', 'third', false);
+                    add(i, '3', 'third', false, kategoriakentta.value);
                 }
             })
 
             nappi.addEventListener('click', function () {
-                add(i, '3', 'third', false);
+                add(i, '3', 'third', false, kategoriakentta.value);
             });
         } else if (i === 4) {
             otsikkokentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '4', 'fourth', false);
+                    add(i, '4', 'fourth', false, kategoriakentta.value);
                 }
             })
 
             tekstikentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
-                    add(i, '4', 'fourth', false);
+                    add(i, '4', 'fourth', false, kategoriakentta.value);
                 }
             })
 
             nappi.addEventListener('click', function () {
-                add(i, '4', 'fourth', false);
+                add(i, '4', 'fourth', false, kategoriakentta.value);
             });
         }
     }
@@ -105,13 +105,19 @@ window.onload = function () {
         httprequest.send(json);
     }
 
-    function add(row, idlaskuri, divid, tietokannasta, otsikko, teksti, valmis) {
+    function add(row, idlaskuri, divid, tietokannasta, kategoria, otsikko, teksti, valmis,) {
         let laskuri;
 
+        let kategoriakentta = document.getElementById('kategoriakentta' + row);
         let otsikkokentta = document.getElementById('otsikkokentta' + row);
         let tekstikentta = document.getElementById('tekstikentta' + row);
 
         if (tietokannasta) {
+
+            if (kategoria !== null) {
+                kategoriakentta.value = kategoria;
+            }
+
             if (idlaskuri === '1') {
                 laskuri = idlaskuri1;
                 console.log(laskuri);
@@ -165,6 +171,7 @@ window.onload = function () {
                 id: laskuri,
                 rivi: row,
                 otsikko: otsikkokentta.value,
+                kategoria: kategoria,
                 teksti: tekstikentta.value,
                 edit: "false",
             });
@@ -420,7 +427,7 @@ window.onload = function () {
                             console.log("false");
                             valmis = false;
                         }
-                        add(json.rows[i].rivi, idlaskuri, divid, true, json.rows[i].otsikko, json.rows[i].teksti, valmis);
+                        add(json.rows[i].rivi, idlaskuri, divid, true, json.rows[i].kategoria, json.rows[i].otsikko, json.rows[i].teksti, valmis);
                         console.log("lisätty");
                     }
                 } else {
