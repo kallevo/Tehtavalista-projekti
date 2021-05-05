@@ -182,6 +182,7 @@ window.onload = function () {
             notecontaineri.append(divi, divi2, divi3);
             document.getElementById(divid).append(notecontaineri);
             notecontaineri.setAttribute('class','notecontaineri');
+            notecontaineri.setAttribute('id','notecontaineri' + row + laskuri);
             divi.setAttribute('class', 'notehead');
             divi2.setAttribute('class', 'note-text');
             divi3.setAttribute('class', 'note-menu');
@@ -264,6 +265,7 @@ window.onload = function () {
                     divi.remove();
                     divi2.remove();
                     divi3.remove();
+                    notecontaineri.remove();
                 }
 
 
@@ -511,6 +513,7 @@ function removeAll(row) {
                 document.getElementById('diviotsikko' + row + i).remove();
                 document.getElementById('divimenu' + row + i).remove();
                 document.getElementById('diviteksti' + row + i).remove();
+                document.getElementById('notecontaineri' + row + i).remove();
             } else {
                 break;
             }
