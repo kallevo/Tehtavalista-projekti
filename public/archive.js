@@ -20,6 +20,7 @@ gethttprequest.onreadystatechange = function() {
                 notecontainer.setAttribute('class', 'notecontainer');
                 divi.setAttribute('class', 'notehead');
                 divi2.setAttribute('class', 'note-text');
+                divi2.setAttribute('id', 'arc-note');
 
                 let p = document.createElement('p');
                 p.innerHTML = teksti;

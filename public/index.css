@@ -197,6 +197,11 @@ li:hover {
     padding: 8px;
     color: #4353b1;
     box-shadow: 4px 8px 15px #888888;
+    min-height: 44px;
+}
+
+#arc-note {
+    border-radius: 0 0 15px 15px;
 }
 .note-category {
     text-align: center;
