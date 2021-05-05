@@ -23,7 +23,7 @@ gethttprequest.onreadystatechange = function() {
 
                 let p = document.createElement('p');
                 p.innerHTML = teksti;
-                p.innerHTML += "<br>rivi: " + json.rows[i].rivi;
+                p.innerHTML += "<br><br>Kategoria: " + json.rows[i].kategoria;
                 divi2.appendChild(p);
 
                 let h2 = document.createElement('h2');
