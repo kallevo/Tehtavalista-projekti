@@ -22,10 +22,7 @@ window.onload = function () {
                 if (event.keyCode === 13) {
                     add(i, '1', 'first', false, kategoriakentta.value);
                 }
-                if (otsikkokentta.length > 30){
-                    alert("Max. 30 kirjainta!");
-                    return false;
-                }
+
             })
 
             tekstikentta.addEventListener('keyup', function (event) {
@@ -37,6 +34,7 @@ window.onload = function () {
             nappi.addEventListener('click', function () {
                 add(i, '1', 'first', false, kategoriakentta.value);
             });
+
         } else if (i === 2) {
             otsikkokentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
@@ -53,6 +51,7 @@ window.onload = function () {
             nappi.addEventListener('click', function () {
                 add(i, '2', 'second', false, kategoriakentta.value);
             });
+
         } else if (i === 3) {
             otsikkokentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
@@ -69,6 +68,7 @@ window.onload = function () {
             nappi.addEventListener('click', function () {
                 add(i, '3', 'third', false, kategoriakentta.value);
             });
+
         } else if (i === 4) {
             otsikkokentta.addEventListener('keyup', function (event) {
                 if (event.keyCode === 13) {
@@ -248,7 +248,7 @@ window.onload = function () {
             poista.innerHTML = '<i class=\"fas fa-window-close\"></i>';
             poista.addEventListener('click', function () {
 
-                var dc = confirm("Haluatko varmasti poistaa tehtävän?");
+                let dc = confirm("Haluatko varmasti poistaa tehtävän?");
                 if (dc === true) {
                     //Tehdään poisto tietokannassa.
                     let postrequest = new XMLHttpRequest();
@@ -260,7 +260,6 @@ window.onload = function () {
                             alert("Yhteysongelma - poistaminen tietokannasta ei välttämättä onnistunut.");
                         }
                     }
-
                     json = JSON.stringify({
                         id: laskuri,
                         rivi: row,
@@ -451,7 +450,7 @@ function hideForm(row) {
 function removeAll(row) {
 
     console.log("Poiston rivi:" + row);
-    var dac = confirm("Haluatko varmasti poistaa kaikki tehtävät tästä kategoriasta?");
+    let dac = confirm("Haluatko varmasti poistaa kaikki tehtävät tästä kategoriasta?");
     if (dac === true) {
 
         let maara;
