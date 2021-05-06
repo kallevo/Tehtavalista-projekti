@@ -1,6 +1,24 @@
+// @ts check
+
+/**
+ * Laskee ekan rivin ID:n.
+ * @type {number}
+ */
 let idlaskuri1 = 0;
+/**
+ * Laskee tokan rivin ID:n.
+ * @type {number}
+ */
 let idlaskuri2 = 0;
+/**
+ * Laskee kolmos rivin ID:n.
+ * @type {number}
+ */
 let idlaskuri3 = 0;
+/**
+ * Laskee nelos rivin ID:n.
+ * @type {number}
+ */
 let idlaskuri4 = 0;
 
 window.onload = function () {

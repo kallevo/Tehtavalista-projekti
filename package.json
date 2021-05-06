@@ -1,5 +1,5 @@
 {
-  "name": "Projekti",
+  "name": "projekti",
   "version": "1.0.0",
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -7,5 +7,25 @@
     "jasmine-node": "^3.0.0",
     "mysql": "^2.18.1",
     "request": "^2.88.2"
-  }
+  },
+  "scripts": {
+    "start": "node server.js",
+    "doc": "jsdoc -c jsdoc.json"
+  },
+  "main": "server.js",
+  "devDependencies": {
+    "jsdoc": "^3.6.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/tehtavalista/tehtavalista-projekti.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/tehtavalista/tehtavalista-projekti/issues"
+  },
+  "homepage": "https://gitlab.com/tehtavalista/tehtavalista-projekti#readme",
+  "description": ""
 }
