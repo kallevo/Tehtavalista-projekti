@@ -22,13 +22,35 @@ let idlaskuri3 = 0;
 let idlaskuri4 = 0;
 
 window.onload = function () {
+    /**
+     * Ladataan muistiinpanot tietokannasta.
+     */
     //Ladataan muistiinpanot tietokannasta
     loadDb();
+    /**
+     * Laitetaan kuuntelijat kaikille riveille.
+     */
     //Laitetaan kuuntelijat kaikille riveille.
     for (let i = 1; i <= 4; i++) {
+        /**
+         * Nappi luo uuden elementin.
+         * @type {HTMLElement}
+         */
         let nappi = document.getElementById('new' + i);
+        /**
+         * Kayttaja kirjoittaa otsikon tahan kenttaan.
+         * @type {HTMLElement}
+         */
         let otsikkokentta = document.getElementById('otsikkokentta' + i);
+        /**
+         * Kayttaja kirjoittaa kategorian tahan kenttaan.
+         * @type {HTMLElement}
+         */
         let kategoriakentta = document.getElementById('kategoriakentta' + i);
+        /**
+         * Kayttaja kirjoittaa kuvauksen tahan kenttaan.
+         * @type {HTMLElement}
+         */
         let tekstikentta = document.getElementById('tekstikentta' + i);
 
         kategoriakentta.addEventListener('blur', function () {
@@ -106,6 +128,11 @@ window.onload = function () {
         }
     }
 
+    /**
+     *
+     * @param row
+     * @param kategoria
+     */
     function httprequest(row, kategoria) {
         let httprequest = new XMLHttpRequest();
         httprequest.open("POST", "/posttaulukko1", true);
