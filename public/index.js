@@ -21,6 +21,7 @@ let idlaskuri3 = 0;
  */
 let idlaskuri4 = 0;
 
+
 window.onload = function () {
     /**
      * Ladataan muistiinpanot tietokannasta.
@@ -31,6 +32,9 @@ window.onload = function () {
      * Laitetaan kuuntelijat kaikille riveille.
      */
     //Laitetaan kuuntelijat kaikille riveille.
+    /**
+     * Taulukoita tulostetaan nelja.
+     */
     for (let i = 1; i <= 4; i++) {
         /**
          * Nappi luo uuden elementin.
@@ -129,9 +133,9 @@ window.onload = function () {
     }
 
     /**
-     *
-     * @param row
-     * @param kategoria
+     * Httprequest valittaa tiedot palvelimelle.
+     * @param row rivi
+     * @param kategoria kategoria
      */
     function httprequest(row, kategoria) {
         let httprequest = new XMLHttpRequest();
@@ -150,13 +154,41 @@ window.onload = function () {
         httprequest.send(json);
     }
 
+    /**
+     * Add-funktiolla lisataan tehtavat.
+     * @param row Rivi
+     * @param idlaskuri Laskee id:n
+     * @param divid Divin id
+     * @param tietokannasta Loytyyko tietokannasta
+     * @param kategoria Tehtavan kategoria
+     * @param otsikko Tehtavan otsikko
+     * @param teksti Tehtavan kuvaus
+     * @param valmis Tehtavan yliviivaus.
+     * @returns {boolean}
+     */
     function add(row, idlaskuri, divid, tietokannasta, kategoria, otsikko, teksti, valmis,) {
+        /**
+         * Laskee rivin id:n
+         */
         let laskuri;
-
+        /**
+         * Hakee kategorian id:n perusteella.
+         * @type {HTMLElement}
+         */
         let kategoriakentta = document.getElementById('kategoriakentta' + row);
+        /**
+         * Hakee otsikon id:n perusteella.
+         * @type {HTMLElement}
+         */
         let otsikkokentta = document.getElementById('otsikkokentta' + row);
+        /**
+         * Hakee kuvauksen id:n perusteella.
+         * @type {HTMLElement}
+         */
         let tekstikentta = document.getElementById('tekstikentta' + row);
-
+        /**
+         * Jos tiedot haetaan tietokannasta, idLaskuri laskee milta rivilta tiedot haetaan.
+         */
         if (tietokannasta) {
 
             if (kategoria !== null) {
@@ -195,12 +227,21 @@ window.onload = function () {
                 console.log(laskuri);
             }
         }
-
+        /**
+         * Jos tietoja ei ole tietokannassa, tulee virheilmoitus.
+         */
         if (!tietokannasta) {
+            /**
+             * Katsotaan onko joku kentista tyhja.
+             */
             //Katsotaan onko joku kenttä tyhjä.
             if (otsikkokentta.value === "" || tekstikentta.value === "") {
                 return false;
             }
+            /**
+             *
+             * @type {XMLHttpRequest}
+             */
             //Tietokantaan lisääminen XMLHttpRequestin avulla
             let httprequest = new XMLHttpRequest();
             httprequest.open("POST", "/posttaulukko1", true);
@@ -211,7 +252,10 @@ window.onload = function () {
                     alert("Yhteysongelma - tiedot eivät välttämättä välity palvelimelle.");
                 }
             }
-
+            /**
+             *
+             * @type {string}
+             */
             json = JSON.stringify({
                 id: laskuri,
                 rivi: row,
@@ -222,9 +266,12 @@ window.onload = function () {
             });
             httprequest.send(json);
         }
-
+        /**
+         *
+         * @type {HTMLDivElement}
+         */
             //Elementtien lisäys dom-puuhun.
-            let notecontaineri = document.createElement('div');
+        let notecontaineri = document.createElement('div');
             let divi = document.createElement('div');
             divi.setAttribute('id', 'diviotsikko' + row + laskuri);
             let divi2 = document.createElement('div');
@@ -238,7 +285,10 @@ window.onload = function () {
             divi.setAttribute('class', 'notehead');
             divi2.setAttribute('class', 'note-text');
             divi3.setAttribute('class', 'note-menu');
-
+        /**
+         * Kuvauksen luominen
+         * @type {HTMLParagraphElement}
+         */
             let p = document.createElement('p');
             p.setAttribute('id', 'teksti' + row + laskuri)
             if (tietokannasta) {
@@ -286,7 +336,10 @@ window.onload = function () {
             }
             }
 
-
+        /**
+         * Muistiinpanojen poisto ja muokkaus
+         * @type {HTMLDivElement}
+         */
             //Muistiinpanon poisto ja muokkaus.
             let poista = document.createElement('div');
             poista.setAttribute('class', 'mdivb');
