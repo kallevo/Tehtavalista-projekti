@@ -21,6 +21,7 @@ let idlaskuri3 = 0;
  */
 let idlaskuri4 = 0;
 
+
 window.onload = function () {
     /**
      * Ladataan muistiinpanot tietokannasta.
@@ -31,6 +32,9 @@ window.onload = function () {
      * Laitetaan kuuntelijat kaikille riveille.
      */
     //Laitetaan kuuntelijat kaikille riveille.
+    /**
+     * Taulukoita tulostetaan nelja.
+     */
     for (let i = 1; i <= 4; i++) {
         /**
          * Nappi luo uuden elementin.
@@ -129,9 +133,9 @@ window.onload = function () {
     }
 
     /**
-     *
-     * @param row
-     * @param kategoria
+     * Httprequest valittaa tiedot palvelimelle.
+     * @param row rivi
+     * @param kategoria kategoria
      */
     function httprequest(row, kategoria) {
         let httprequest = new XMLHttpRequest();
@@ -150,15 +154,42 @@ window.onload = function () {
         httprequest.send(json);
     }
 
+    /**
+     * Add-funktiolla lisataan tehtavat.
+     * @param row Rivi
+     * @param idlaskuri Laskee id:n
+     * @param divid Divin id
+     * @param tietokannasta Loytyyko tietokannasta
+     * @param kategoria Tehtavan kategoria
+     * @param otsikko Tehtavan otsikko
+     * @param teksti Tehtavan kuvaus
+     * @param valmis Tehtavan yliviivaus.
+     * @returns {boolean}
+     */
     function add(row, idlaskuri, divid, tietokannasta, kategoria, otsikko, teksti, valmis,) {
+        /**
+         * Laskee rivin id:n
+         */
         let laskuri;
-
+        /**
+         * Hakee kategorian id:n perusteella.
+         * @type {HTMLElement}
+         */
         let kategoriakentta = document.getElementById('kategoriakentta' + row);
+        /**
+         * Hakee otsikon id:n perusteella.
+         * @type {HTMLElement}
+         */
         let otsikkokentta = document.getElementById('otsikkokentta' + row);
+        /**
+         * Hakee kuvauksen id:n perusteella.
+         * @type {HTMLElement}
+         */
         let tekstikentta = document.getElementById('tekstikentta' + row);
-
+        /**
+         * Jos tiedot haetaan tietokannasta, idLaskuri laskee milta rivilta tiedot haetaan.
+         */
         if (tietokannasta) {
-
             if (kategoria !== null) {
                 kategoriakentta.value = kategoria;
             }
@@ -195,12 +226,21 @@ window.onload = function () {
                 console.log(laskuri);
             }
         }
-
+        /**
+         * Jos tietoja ei ole tietokannassa, tulee virheilmoitus.
+         */
         if (!tietokannasta) {
+            /**
+             * Katsotaan onko joku kentista tyhja.
+             */
             //Katsotaan onko joku kenttä tyhjä.
             if (otsikkokentta.value === "" || tekstikentta.value === "") {
                 return false;
             }
+            /**
+             *
+             * @type {XMLHttpRequest}
+             */
             //Tietokantaan lisääminen XMLHttpRequestin avulla
             let httprequest = new XMLHttpRequest();
             httprequest.open("POST", "/posttaulukko1", true);
@@ -211,7 +251,10 @@ window.onload = function () {
                     alert("Yhteysongelma - tiedot eivät välttämättä välity palvelimelle.");
                 }
             }
-
+            /**
+             *
+             * @type {string}
+             */
             json = JSON.stringify({
                 id: laskuri,
                 rivi: row,
@@ -222,9 +265,12 @@ window.onload = function () {
             });
             httprequest.send(json);
         }
-
+        /**
+         * Elementtien lisays dom-puuhun.
+         * @type {HTMLDivElement}
+         */
             //Elementtien lisäys dom-puuhun.
-            let notecontaineri = document.createElement('div');
+        let notecontaineri = document.createElement('div');
             let divi = document.createElement('div');
             divi.setAttribute('id', 'diviotsikko' + row + laskuri);
             let divi2 = document.createElement('div');
@@ -238,11 +284,17 @@ window.onload = function () {
             divi.setAttribute('class', 'notehead');
             divi2.setAttribute('class', 'note-text');
             divi3.setAttribute('class', 'note-menu');
-
+        /**
+         * Kuvauksen luominen.
+         * @type {HTMLParagraphElement}
+         */
             let p = document.createElement('p');
             p.setAttribute('id', 'teksti' + row + laskuri)
             if (tietokannasta) {
                 p.innerHTML = teksti;
+                /**
+                 * Jos tehtava on valmis, kuvaus merkataan yliviivatuksi, jos ei niin arvo pysyy samana.
+                 */
                 if (valmis) {
                     p.style.textDecoration = "line-through";
                 }
@@ -250,11 +302,17 @@ window.onload = function () {
                 p.innerHTML = tekstikentta.value;
             }
             divi2.appendChild(p);
-
-            let h2 = document.createElement('h2');
+        /**
+         * Otsikon luominen.
+         * @type {HTMLHeadingElement}
+         */
+        let h2 = document.createElement('h2');
             h2.setAttribute('id', 'otsikko' + row + laskuri);
             divi.appendChild(h2);
-            if (tietokannasta) {
+        /**
+         * Jos tehtava on valmis, otsikko merkitaan myos yliviivatuksi, jos ei niin arvo pysyy samana.
+         */
+        if (tietokannasta) {
                 h2.innerHTML = otsikko;
                 if (valmis) {
                     h2.style.textDecoration = "line-through";
@@ -263,7 +321,9 @@ window.onload = function () {
             } else {
                 h2.innerHTML = otsikkokentta.value;
             }
-
+        /**
+         * Jos tehtava merkitaan valmiiksi, tarpeettomat elementit poistetaan.
+         */
             if (valmis === undefined) {
                 let pmenu = document.createElement('p');
                 pmenu.setAttribute('id', 'menu' + row + laskuri);
@@ -286,13 +346,15 @@ window.onload = function () {
             }
             }
 
-
+        /**
+         * Muistiinpanojen poisto.
+         * @type {HTMLDivElement}
+         */
             //Muistiinpanon poisto ja muokkaus.
             let poista = document.createElement('div');
             poista.setAttribute('class', 'mdivb');
             poista.innerHTML = '<i class=\"fas fa-window-close\"></i>';
             poista.addEventListener('click', function () {
-
                 let dc = confirm("Haluatko varmasti poistaa tehtävän?");
                 if (dc === true) {
                     //Tehdään poisto tietokannassa.
@@ -305,6 +367,7 @@ window.onload = function () {
                             alert("Yhteysongelma - poistaminen tietokannasta ei välttämättä onnistunut.");
                         }
                     }
+
                     json = JSON.stringify({
                         id: laskuri,
                         rivi: row,
@@ -321,7 +384,9 @@ window.onload = function () {
 
 
             })
-
+        /**
+         * Muistiinpanojen muokkaus.
+         */
         if (valmis === undefined) {
             let muokkaus = document.createElement('div');
             muokkaus.setAttribute('id', 'muokkaa' + row + laskuri);
@@ -341,6 +406,16 @@ window.onload = function () {
             tekstikentta.value = "";
     }
 
+    /**
+     * Edit-funktiolla voidaan muokata elementin ominaisuuksia
+     * @param otsikkoid otsikko
+     * @param tekstiid kuvaus
+     * @param otsikondiviid otsikon div
+     * @param tekstindiviid kuvauksen div
+     * @param muokkausnappiid muokkausnappi
+     * @param idlaskuri id:n laskuri
+     * @param row rivi
+     */
     function edit(otsikkoid, tekstiid, otsikondiviid, tekstindiviid, muokkausnappiid, idlaskuri, row) {
         let otsikko = document.getElementById(otsikkoid);
         let teksti = document.getElementById(tekstiid);
@@ -379,6 +454,9 @@ window.onload = function () {
 
         valmis.addEventListener('click', click);
 
+        /**
+         * Click-funktiolla tehdaan muokkaus tietokantaan.
+         */
         function click() {
             //Muokkaus tietokantaan
             let editrequest = new XMLHttpRequest();
@@ -390,7 +468,6 @@ window.onload = function () {
                     alert("Yhteysongelma - tiedot eivät välttämättä välity palvelimelle.");
                 }
             }
-
             json = JSON.stringify({
                 id: idlaskuri,
                 rivi: row,
@@ -412,7 +489,11 @@ window.onload = function () {
             ogmuokkaus.style.display = 'inline-block';
         }
     }
-
+    /**
+     * Kun tehtava on valmis sen arvot lahtevat tietokantaan.
+     * @param idlaskuri
+     * @param row
+     */
     function done(idlaskuri, row) {
         let donerequest = new XMLHttpRequest();
         donerequest.open("POST", "/posttaulukko1", true);
@@ -492,7 +573,12 @@ function hideForm(row) {
         }
     }
 
-function removeAll(row) {
+/**
+ * RemoveAll-funktiolla voidaan poistaa kaikki rivin tehtavat.
+ * @param row
+ * @returns {boolean}
+ */
+    function removeAll(row) {
 
     console.log("Poiston rivi:" + row);
     let dac = confirm("Haluatko varmasti poistaa kaikki tehtävät tästä kategoriasta?");
@@ -541,7 +627,10 @@ function removeAll(row) {
                 return false;
             }
         }
-
+        /**
+         * Poistetaan kaikki tietokannasta.
+         * @type {XMLHttpRequest}
+         */
         //Poista kaikki - Tietokannasta poisto
         let postrequest2 = new XMLHttpRequest();
         let json;
@@ -556,7 +645,9 @@ function removeAll(row) {
             montapoistoa: "true",
         });
         postrequest2.send(json);
-
+        /**
+         * Poistetaan elementit.
+         */
         //Elementtien poisto
         for (let i = maara; i >= 0; i--) {
             try {

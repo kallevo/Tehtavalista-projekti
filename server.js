@@ -1,16 +1,25 @@
+/**
+ * Kayttajan taytyy laittaa kaikkiin kohtiin tekstia.
+ * @type {{createConnection?: function((Object|string)): Connection, createPool?: function((Object|string)): Pool, createPoolCluster?: function(Object=): PoolCluster, createQuery?: function(string, Array=, Function=): Query, escape?: function(*, boolean=, string=): string, escapeId?: function(*, boolean=): string, format?: function(string, Array=, boolean=, string=): string, raw?: function(string): *, Types?: *}}
+ */
 let mysql = require('mysql');
 let express = require('express');
 let app = express();
 let path = require('path');
 let bodyParser = require('body-parser');
-
+/**
+ * Luodaan yhteys.
+ * @type {Connection}
+ */
 const conn = mysql.createConnection({
     host: "mysql.metropolia.fi",
     user: "kallevo",
     password: "todo123",
     database: "kallevo"
 });
-
+/**
+ * Yhdistetaan MySQL:aan.
+ */
 conn.connect(function(err) {
     if (err) throw err;
     console.log("Connected to MySQL!");
@@ -30,7 +39,9 @@ app.get("/index", function (req, res) {
 app.get("/archive", function (req, res) {
     res.sendFile(__dirname + "/" + "archive.html");
 })
-
+/**
+ * Tietokannan lisays taulukko1:een.
+ */
 //Tietokannan taulukko1:een lisääminen
 app.post("/posttaulukko1", urlencodedParser, function (req, res) {
     let sql1, sql2, sql3, sql4;
@@ -73,6 +84,9 @@ app.post("/posttaulukko1", urlencodedParser, function (req, res) {
         }
     })()
 });
+/**
+ * Tietokanna lisays arkistoon ja taulukko1:sesta poistaminen.
+ */
 //Tietokannan arkistoon lisääminen ja taulukko1:stä poistaminen
 app.post("/postarkisto", urlencodedParser, function (req, res) {
     let sql1, sql2, sql3, sql4;
@@ -113,7 +127,9 @@ app.post("/postarkisto", urlencodedParser, function (req, res) {
         }
     })()
 });
-
+/**
+ * Tietokannasta hakeminen.
+ */
 //Tietokannasta hakeminen
 app.get("/gettaulukko1", function (req, res) {
     let string;
@@ -136,7 +152,9 @@ app.get("/gettaulukko1", function (req, res) {
         }
     })()
 });
-
+/**
+ * Arkistosta hakeminen.
+ */
 app.get("/getarkisto", function (req, res) {
     let string;
 
@@ -158,7 +176,6 @@ app.get("/getarkisto", function (req, res) {
         }
     })()
 });
-
 let server = app.listen(8080, function () {
     let host = server.address().address
     let port = server.address().port
