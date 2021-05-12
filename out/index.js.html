@@ -1,4 +1,32 @@
-// @ts check
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: index.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: index.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// @ts check
 
 /**
  * Laskee ekan rivin ID:n.
@@ -34,7 +62,7 @@ window.onload = function () {
     /**
      * Laitetaan kuuntelijat kaikille riveille.
      */
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i &lt;= 4; i++) {
         /**
          * Nappi luo uuden elementin.
          * @type {HTMLElement}
@@ -133,7 +161,6 @@ window.onload = function () {
 
     /**
      * Httprequest valittaa tiedot palvelimelle.
-     * @property httprequest valittaa tiedot palvelimelle
      * @param row rivi
      * @param kategoria kategoria
      */
@@ -143,7 +170,7 @@ window.onload = function () {
         let json;
         httprequest.setRequestHeader("Content-Type", "application/json");
         httprequest.onreadystatechange = function() {
-            if (httprequest.readyState !== 4 && httprequest.status !== 200) {
+            if (httprequest.readyState !== 4 &amp;&amp; httprequest.status !== 200) {
                 alert("Yhteysongelma - tiedot eivät välttämättä välity palvelimelle.");
             }
         }
@@ -156,7 +183,6 @@ window.onload = function () {
 
     /**
      * Add-funktiolla lisataan tehtavat.
-     * @property {function} add lisaa tehtavat.
      * @param row Rivi
      * @param idlaskuri Laskee id:n
      * @param divid Divin id
@@ -248,7 +274,7 @@ window.onload = function () {
             let json;
             httprequest.setRequestHeader("Content-Type", "application/json");
             httprequest.onreadystatechange = function() {
-                if (httprequest.readyState !== 4 && httprequest.status !== 200) {
+                if (httprequest.readyState !== 4 &amp;&amp; httprequest.status !== 200) {
                     alert("Yhteysongelma - tiedot eivät välttämättä välity palvelimelle.");
                 }
             }
@@ -341,9 +367,9 @@ window.onload = function () {
                 })
 
             if (tietokannasta) {
-                pmenu.innerHTML = "<i class=\"fas fa-check-square\">";
+                pmenu.innerHTML = "&lt;i class=\"fas fa-check-square\">";
             } else {
-                pmenu.innerHTML = "<i class=\"fas fa-check-square\"></i>";
+                pmenu.innerHTML = "&lt;i class=\"fas fa-check-square\">&lt;/i>";
             }
             }
 
@@ -354,7 +380,7 @@ window.onload = function () {
             //Muistiinpanon poisto ja muokkaus.
             let poista = document.createElement('div');
             poista.setAttribute('class', 'mdivb');
-            poista.innerHTML = '<i class=\"fas fa-window-close\"></i>';
+            poista.innerHTML = '&lt;i class=\"fas fa-window-close\">&lt;/i>';
             poista.addEventListener('click', function () {
                 let dc = confirm("Haluatko varmasti poistaa tehtävän?");
                 if (dc === true) {
@@ -364,7 +390,7 @@ window.onload = function () {
                     let json;
                     postrequest.setRequestHeader("Content-Type", "application/json");
                     postrequest.onreadystatechange = function() {
-                        if (postrequest.readyState !== 4 && postrequest.status !== 200) {
+                        if (postrequest.readyState !== 4 &amp;&amp; postrequest.status !== 200) {
                             alert("Yhteysongelma - poistaminen tietokannasta ei välttämättä onnistunut.");
                         }
                     }
@@ -392,7 +418,7 @@ window.onload = function () {
             let muokkaus = document.createElement('div');
             muokkaus.setAttribute('id', 'muokkaa' + row + laskuri);
             muokkaus.setAttribute('class', 'muokkaus');
-            muokkaus.innerHTML += '<i class=\"fas fa-pen-square\"></i>';
+            muokkaus.innerHTML += '&lt;i class=\"fas fa-pen-square\">&lt;/i>';
             muokkaus.addEventListener('click', function () {
                 edit(h2.id, p.id, divi.id, divi2.id, muokkaus.id, laskuri, row);
             });
@@ -409,7 +435,6 @@ window.onload = function () {
 
     /**
      * Edit-funktiolla voidaan muokata elementin ominaisuuksia
-     * @type {function}
      * @param otsikkoid otsikko
      * @param tekstiid kuvaus
      * @param otsikondiviid otsikon div
@@ -466,7 +491,7 @@ window.onload = function () {
             let json;
             editrequest.setRequestHeader("Content-Type", "application/json");
             editrequest.onreadystatechange = function() {
-                if (editrequest.readyState !== 4 && editrequest.status !== 200) {
+                if (editrequest.readyState !== 4 &amp;&amp; editrequest.status !== 200) {
                     alert("Yhteysongelma - tiedot eivät välttämättä välity palvelimelle.");
                 }
             }
@@ -502,7 +527,7 @@ window.onload = function () {
         let json;
         donerequest.setRequestHeader("Content-Type", "application/json");
         donerequest.onreadystatechange = function() {
-            if (donerequest.readyState !== 4 && donerequest.status !== 200) {
+            if (donerequest.readyState !== 4 &amp;&amp; donerequest.status !== 200) {
                 alert("Yhteysongelma - tiedot eivät välttämättä välity palvelimelle.");
             }
         }
@@ -515,17 +540,13 @@ window.onload = function () {
         donerequest.send(json);
     }
 
-    /**
-     * LoadDb hakee taulukkojen tiedot tietokannasta
-     * @type {function}
-     */
     function loadDb() {
         let gethttprequest = new XMLHttpRequest();
         gethttprequest.open("GET", "/gettaulukko1", true);
         let json;
         gethttprequest.setRequestHeader("Content-Type", "application/json");
         gethttprequest.onreadystatechange = function() {
-            if (gethttprequest.readyState === 4 && gethttprequest.status === 200) {
+            if (gethttprequest.readyState === 4 &amp;&amp; gethttprequest.status === 200) {
                 json = JSON.parse(gethttprequest.responseText);
 
                 if (json.numOfRows > 0) {
@@ -643,7 +664,7 @@ function hideForm(row) {
         postrequest2.open("POST", "/postarkisto", true);
         postrequest2.setRequestHeader("Content-Type", "application/json");
         postrequest2.onreadystatechange = function() {
-            if (postrequest2.readyState !== 4 && postrequest2.status !== 200) {
+            if (postrequest2.readyState !== 4 &amp;&amp; postrequest2.status !== 200) {
                 alert("Yhteysongelma - poistaminen tietokannasta ei välttämättä onnistunut.");
             }}
         json = JSON.stringify({
@@ -669,3 +690,26 @@ function hideForm(row) {
 
     }
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#idlaskuri1">idlaskuri1</a></li><li><a href="global.html#idlaskuri2">idlaskuri2</a></li><li><a href="global.html#idlaskuri3">idlaskuri3</a></li><li><a href="global.html#idlaskuri4">idlaskuri4</a></li><li><a href="global.html#removeAll">removeAll</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue May 11 2021 14:39:07 GMT+0300 (Itä-Euroopan kesäaika)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
